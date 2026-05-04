@@ -70,9 +70,8 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
                cache: 'no-store',
             })
          }
-         router.refresh()
-         router.push(`/banners`)
          toast.success(toastMessage)
+         window.location.assign('/banners')
       } catch (error: any) {
          toast.error('Something went wrong.')
       } finally {
@@ -83,19 +82,14 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
    const onDelete = async () => {
       try {
          setLoading(true)
-
          await fetch(`/api/banners/${params.bannerId}`, {
             method: 'DELETE',
             cache: 'no-store',
          })
-
-         router.refresh()
-         router.push(`/banners`)
          toast.success('Banner deleted.')
+         window.location.assign('/banners')
       } catch (error: any) {
-         toast.error(
-            'Make sure you removed all categories using this banner first.'
-         )
+         toast.error('Make sure you removed all categories using this banner first.')
       } finally {
          setLoading(false)
          setOpen(false)

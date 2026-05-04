@@ -80,8 +80,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                cache: 'no-store',
             })
          }
-         router.refresh()
-         router.push(`/categories`)
+         window.location.assign(`/categories`)
          toast.success(toastMessage)
       } catch (error: any) {
          toast.error('Something went wrong.')
@@ -99,8 +98,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
             cache: 'no-store',
          })
 
-         router.refresh()
-         router.push(`/categories`)
+         window.location.assign(`/categories`)
          toast.success('Category deleted.')
       } catch (error: any) {
          toast.error(

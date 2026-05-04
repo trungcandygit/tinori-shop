@@ -80,8 +80,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ initialData }) => {
             })
          }
 
-         router.refresh()
-         router.push(`/products`)
+         window.location.assign(`/products`)
          toast.success(toastMessage)
       } catch (error: any) {
          toast.error('Something went wrong.')

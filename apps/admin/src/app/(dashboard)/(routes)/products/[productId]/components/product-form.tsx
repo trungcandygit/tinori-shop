@@ -106,8 +106,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             })
          }
 
-         router.refresh()
-         router.push(`/products`)
+         window.location.assign(`/products`)
          toast.success(toastMessage)
       } catch (error: any) {
          toast.error('Đã có lỗi xảy ra.')
@@ -125,8 +124,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
             cache: 'no-store',
          })
 
-         router.refresh()
-         router.push(`/products`)
+         window.location.assign(`/products`)
          toast.success('Sản phẩm đã được xoá.')
       } catch (error: any) {
          toast.error('Đã có lỗi xảy ra.')

@@ -71,8 +71,7 @@ export const BrandForm: React.FC<BrandFormProps> = ({ initialData }) => {
                cache: 'no-store',
             })
          }
-         router.refresh()
-         router.push(`/brands`)
+         window.location.assign(`/brands`)
          toast.success(toastMessage)
       } catch (error: any) {
          toast.error('Something went wrong.')
@@ -90,8 +89,7 @@ export const BrandForm: React.FC<BrandFormProps> = ({ initialData }) => {
             cache: 'no-store',
          })
 
-         router.refresh()
-         router.push(`/brands`)
+         window.location.assign(`/brands`)
          toast.success('Brand deleted.')
       } catch (error: any) {
          toast.error(
