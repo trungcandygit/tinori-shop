@@ -35,7 +35,7 @@ async function main() {
 
    const providers = ['VNPay', 'MoMo', 'ZaloPay']
 
-   const owners = ['admin@tinori.vn']
+   const owners = ['kontrungcany@gmail.com']
 
    const categories = [
       'Áo',
@@ -303,7 +303,7 @@ async function main() {
       await prisma.author.create({
          data: {
             name: 'Nguyễn Thị Mai',
-            email: 'admin@tinori.vn',
+            email: 'kontrungcany@gmail.com',
             blogs: {
                create: blogPosts,
             },
@@ -317,7 +317,7 @@ async function main() {
 
    const user = await prisma.user.create({
       data: {
-         email: 'admin@tinori.vn',
+         email: 'kontrungcany@gmail.com',
          name: 'Nguyễn Văn Admin',
          cart: {
             create: {},
