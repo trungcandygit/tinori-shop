@@ -96,15 +96,8 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
             method: 'DELETE',
             cache: 'no-store',
          })
-<<<<<<< Updated upstream
-
-         router.refresh()
-         router.push(`/categories`)
-         toast.success('Category deleted.')
-=======
          window.location.assign(`/categories`)
          toast.success('Danh mục đã được xoá.')
->>>>>>> Stashed changes
       } catch (error: any) {
          toast.error('Hãy xoá tất cả sản phẩm thuộc danh mục này trước.')
       } finally {
