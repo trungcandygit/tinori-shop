@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { Heading } from '@/components/ui/heading'
 import { Separator } from '@/components/ui/separator'
 import prisma from '@/lib/prisma'

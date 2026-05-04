@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { getGraphRevenue } from '@/actions/get-graph-revenue'
 import { getSalesCount } from '@/actions/get-sales-count'
 import { getStockCount } from '@/actions/get-stock-count'

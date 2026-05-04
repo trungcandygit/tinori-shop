@@ -66,22 +66,20 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
    const onSubmit = async (data: CategoryFormValues) => {
       try {
          setLoading(true)
-         if (initialData) {
-            await fetch(`/api/categories/${params.categoryId}`, {
-               method: 'PATCH',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
-         } else {
-            await fetch(`/api/categories`, {
-               method: 'POST',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
-         }
-         router.refresh()
-         router.push(`/categories`)
+         const res = initialData
+            ? await fetch(`/api/categories/${params.categoryId}`, {
+                 method: 'PATCH',
+                 body: JSON.stringify(data),
+                 cache: 'no-store',
+              })
+            : await fetch(`/api/categories`, {
+                 method: 'POST',
+                 body: JSON.stringify(data),
+                 cache: 'no-store',
+              })
+         if (!res.ok) throw new Error(await res.text())
          toast.success(toastMessage)
+         window.location.assign(`/categories`)
       } catch (error: any) {
          toast.error('Đã có lỗi xảy ra.')
       } finally {

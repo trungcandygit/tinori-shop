@@ -13,7 +13,6 @@ import {
    FormMessage,
 } from '@/components/ui/form'
 import { Heading } from '@/components/ui/heading'
-import ImageUpload from '@/components/ui/image-upload'
 import { Input } from '@/components/ui/input'
 import {
    Select,
@@ -27,7 +26,7 @@ import type { ProductWithIncludes } from '@/types/prisma'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Category } from '@prisma/client'
 import { Trash } from 'lucide-react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
@@ -56,7 +55,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({
    categories,
 }) => {
    const params = useParams()
-   const router = useRouter()
 
    const [open, setOpen] = useState(false)
    const [loading, setLoading] = useState(false)
@@ -69,17 +67,17 @@ export const ProductForm: React.FC<ProductFormProps> = ({
    const defaultValues = initialData
       ? {
            ...initialData,
-           price: parseFloat(String(initialData?.price.toFixed(2))),
-           discount: parseFloat(String(initialData?.discount.toFixed(2))),
+           price: parseFloat(String(initialData.price.toFixed(2))),
+           discount: parseFloat(String(initialData.discount.toFixed(2))),
+           categoryId: initialData.categories?.[0]?.id ?? '',
         }
       : {
-           title: '---',
-           description: '---',
+           title: '',
            images: [],
            price: 0,
            discount: 0,
            stock: 0,
-           categoryId: '---',
+           categoryId: '',
            isFeatured: false,
            isAvailable: false,
         }
@@ -92,26 +90,22 @@ export const ProductForm: React.FC<ProductFormProps> = ({
    const onSubmit = async (data: ProductFormValues) => {
       try {
          setLoading(true)
-
-         if (initialData) {
-            await fetch(`/api/products/${params.productId}`, {
-               method: 'PATCH',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
-         } else {
-            await fetch(`/api/products`, {
-               method: 'POST',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
-         }
-
-         router.refresh()
-         router.push(`/products`)
+         const res = initialData
+            ? await fetch(`/api/products/${params.productId}`, {
+                 method: 'PATCH',
+                 body: JSON.stringify(data),
+                 cache: 'no-store',
+              })
+            : await fetch(`/api/products`, {
+                 method: 'POST',
+                 body: JSON.stringify(data),
+                 cache: 'no-store',
+              })
+         if (!res.ok) throw new Error(await res.text())
          toast.success(toastMessage)
+         window.location.assign(`/products`)
       } catch (error: any) {
-         toast.error('Đã có lỗi xảy ra.')
+         toast.error('Đã có lỗi xảy ra: ' + error.message)
       } finally {
          setLoading(false)
       }
@@ -120,14 +114,12 @@ export const ProductForm: React.FC<ProductFormProps> = ({
    const onDelete = async () => {
       try {
          setLoading(true)
-
-         await fetch(`/api/products/${params.productId}`, {
+         const res = await fetch(`/api/products/${params.productId}`, {
             method: 'DELETE',
             cache: 'no-store',
          })
-
-         router.refresh()
-         router.push(`/products`)
+         if (!res.ok) throw new Error(await res.text())
+         window.location.assign(`/products`)
          toast.success('Sản phẩm đã được xoá.')
       } catch (error: any) {
          toast.error('Đã có lỗi xảy ra.')
@@ -169,20 +161,19 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                   name="images"
                   render={({ field }) => (
                      <FormItem>
-                        <FormLabel>Hình Ảnh</FormLabel>
+                        <FormLabel>Hình Ảnh (URL, cách nhau bằng dấu phẩy)</FormLabel>
                         <FormControl>
-                           <ImageUpload
-                              value={field.value.map((image) => image)}
+                           <Input
                               disabled={loading}
-                              onChange={(url) =>
-                                 field.onChange([...field.value, { url }])
-                              }
-                              onRemove={(url) =>
-                                 field.onChange([
-                                    ...field.value.filter(
-                                       (current) => current !== url
-                                    ),
-                                 ])
+                              placeholder="https://example.com/image.jpg"
+                              value={field.value.join(',')}
+                              onChange={(e) =>
+                                 field.onChange(
+                                    e.target.value
+                                       .split(',')
+                                       .map((s) => s.trim())
+                                       .filter(Boolean)
+                                 )
                               }
                            />
                         </FormControl>
@@ -218,7 +209,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                               <Input
                                  type="number"
                                  disabled={loading}
-                                 placeholder="9.99"
+                                 placeholder="100000"
                                  {...field}
                               />
                            </FormControl>
@@ -236,7 +227,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                               <Input
                                  type="number"
                                  disabled={loading}
-                                 placeholder="9.99"
+                                 placeholder="0"
                                  {...field}
                               />
                            </FormControl>

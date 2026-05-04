@@ -57,21 +57,20 @@ export const BrandForm: React.FC<BrandFormProps> = ({ initialData }) => {
    const onSubmit = async (data: BrandFormValues) => {
       try {
          setLoading(true)
-         if (initialData) {
-            await fetch(`/api/brands/${params.brandId}`, {
-               method: 'PATCH',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
-         } else {
-            await fetch(`/api/brands`, {
-               method: 'POST',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
-         }
-         window.location.assign(`/brands`)
+         const res = initialData
+            ? await fetch(`/api/brands/${params.brandId}`, {
+                 method: 'PATCH',
+                 body: JSON.stringify(data),
+                 cache: 'no-store',
+              })
+            : await fetch(`/api/brands`, {
+                 method: 'POST',
+                 body: JSON.stringify(data),
+                 cache: 'no-store',
+              })
+         if (!res.ok) throw new Error(await res.text())
          toast.success(toastMessage)
+         window.location.assign(`/brands`)
       } catch (error: any) {
          toast.error('Đã có lỗi xảy ra.')
       } finally {
