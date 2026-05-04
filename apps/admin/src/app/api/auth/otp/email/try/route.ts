@@ -45,12 +45,12 @@ export async function POST(req: NextRequest) {
       if (!isEmailValid(email)) {
          return getErrorResponse(400, 'Incorrect Email')
       }
-   } catch (error) {
-      console.error(error)
+   } catch (error: any) {
+      console.error('LOGIN ERROR:', error?.message, error?.code, JSON.stringify(error))
       if (error instanceof ZodError) {
          return getErrorResponse(400, 'failed validations', error)
       }
 
-      return getErrorResponse(500, error.message)
+      return getErrorResponse(500, error?.message || 'Unknown error')
    }
 }
