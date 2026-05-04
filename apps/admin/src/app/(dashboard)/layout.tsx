@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import Navbar from '@/components/navbar'
 
 export default async function DashboardLayout({

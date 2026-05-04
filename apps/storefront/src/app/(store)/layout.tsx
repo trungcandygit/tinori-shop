@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import Footer from '@/components/native/Footer'
 import Header from '@/components/native/nav/parent'
 
