@@ -2,26 +2,13 @@ import prisma from '@/lib/prisma'
 import { NextResponse } from 'next/server'
 
 export async function GET(
-   req: Request,
+   _: Request,
    { params }: { params: { categoryId: string } }
 ) {
    try {
-      const userId = req.headers.get('X-USER-ID')
-
-      if (!userId) {
-         return new NextResponse('Unauthorized', { status: 401 })
-      }
-
-      if (!params.categoryId) {
-         return new NextResponse('Category id is required', { status: 400 })
-      }
-
       const category = await prisma.category.findUnique({
-         where: {
-            id: params.categoryId,
-         },
+         where: { id: params.categoryId },
       })
-
       return NextResponse.json(category)
    } catch (error) {
       console.error('[CATEGORY_GET]', error)
@@ -30,26 +17,13 @@ export async function GET(
 }
 
 export async function DELETE(
-   req: Request,
+   _: Request,
    { params }: { params: { categoryId: string } }
 ) {
    try {
-      const userId = req.headers.get('X-USER-ID')
-
-      if (!userId) {
-         return new NextResponse('Unauthorized', { status: 401 })
-      }
-
-      if (!params.categoryId) {
-         return new NextResponse('Category id is required', { status: 400 })
-      }
-
       const category = await prisma.category.delete({
-         where: {
-            id: params.categoryId,
-         },
+         where: { id: params.categoryId },
       })
-
       return NextResponse.json(category)
    } catch (error) {
       console.error('[CATEGORY_DELETE]', error)
@@ -62,41 +36,20 @@ export async function PATCH(
    { params }: { params: { categoryId: string } }
 ) {
    try {
-      const userId = req.headers.get('X-USER-ID')
-
-      if (!userId) {
-         return new NextResponse('Unauthorized', { status: 401 })
-      }
-
       const body = await req.json()
-
       const { title, description, bannerId } = body
-
-      if (!bannerId) {
-         return new NextResponse('Banner ID is required', { status: 400 })
-      }
 
       if (!title) {
          return new NextResponse('Name is required', { status: 400 })
       }
 
-      if (!params.categoryId) {
-         return new NextResponse('Category id is required', { status: 400 })
-      }
+      const data: any = { title }
+      if (description !== undefined) data.description = description
+      if (bannerId) data.banners = { connect: { id: bannerId } }
 
       const updatedCategory = await prisma.category.update({
-         where: {
-            id: params.categoryId,
-         },
-         data: {
-            title,
-            description,
-            banners: {
-               connect: {
-                  id: bannerId,
-               },
-            },
-         },
+         where: { id: params.categoryId },
+         data,
       })
 
       return NextResponse.json(updatedCategory)

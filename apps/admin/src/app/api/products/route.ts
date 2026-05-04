@@ -3,12 +3,6 @@ import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
    try {
-      const userId = req.headers.get('X-USER-ID')
-
-      if (!userId) {
-         return new NextResponse('Unauthorized', { status: 401 })
-      }
-
       const { title, images, price, discount, stock, categoryId, isFeatured, isAvailable } =
          await req.json()
 
@@ -44,14 +38,8 @@ export async function POST(req: Request) {
    }
 }
 
-export async function GET(req: Request) {
+export async function GET() {
    try {
-      const userId = req.headers.get('X-USER-ID')
-
-      if (!userId) {
-         return new NextResponse('Unauthorized', { status: 401 })
-      }
-
       const products = await prisma.product.findMany({
          include: { categories: true, brand: true },
       })

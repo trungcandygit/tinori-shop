@@ -23,7 +23,7 @@ import { Separator } from '@/components/ui/separator'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Banner, Category } from '@prisma/client'
 import { Trash } from 'lucide-react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
@@ -31,7 +31,8 @@ import * as z from 'zod'
 
 const formSchema = z.object({
    title: z.string().min(2),
-   description: z.string().min(1),
+   description: z.string().optional(),
+   bannerId: z.string().optional(),
 })
 
 type CategoryFormValues = z.infer<typeof formSchema>
@@ -46,22 +47,20 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
    banners,
 }) => {
    const params = useParams()
-   const router = useRouter()
 
    const [open, setOpen] = useState(false)
    const [loading, setLoading] = useState(false)
 
-   const title = initialData ? 'Edit category' : 'Create category'
-   const description = initialData ? 'Edit a category.' : 'Add a new category'
-   const toastMessage = initialData ? 'Category updated.' : 'Category created.'
-   const action = initialData ? 'Save changes' : 'Create'
+   const title = initialData ? 'Chỉnh Sửa Danh Mục' : 'Tạo Danh Mục Mới'
+   const description = initialData ? 'Chỉnh sửa thông tin danh mục.' : 'Thêm danh mục mới'
+   const toastMessage = initialData ? 'Danh mục đã được cập nhật.' : 'Danh mục đã được tạo.'
+   const action = initialData ? 'Lưu thay đổi' : 'Tạo mới'
 
    const form = useForm<CategoryFormValues>({
       resolver: zodResolver(formSchema),
-      defaultValues: initialData || {
-         title: '',
-         description: '',
-      },
+      defaultValues: initialData
+         ? { title: initialData.title, description: initialData.description ?? '' }
+         : { title: '', description: '', bannerId: '' },
    })
 
    const onSubmit = async (data: CategoryFormValues) => {
@@ -84,7 +83,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
          router.push(`/categories`)
          toast.success(toastMessage)
       } catch (error: any) {
-         toast.error('Something went wrong.')
+         toast.error('Đã có lỗi xảy ra.')
       } finally {
          setLoading(false)
       }
@@ -93,19 +92,21 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
    const onDelete = async () => {
       try {
          setLoading(true)
-
          await fetch(`/api/categories/${params.categoryId}`, {
             method: 'DELETE',
             cache: 'no-store',
          })
+<<<<<<< Updated upstream
 
          router.refresh()
          router.push(`/categories`)
          toast.success('Category deleted.')
+=======
+         window.location.assign(`/categories`)
+         toast.success('Danh mục đã được xoá.')
+>>>>>>> Stashed changes
       } catch (error: any) {
-         toast.error(
-            'Make sure you removed all products using this category first.'
-         )
+         toast.error('Hãy xoá tất cả sản phẩm thuộc danh mục này trước.')
       } finally {
          setLoading(false)
          setOpen(false)
@@ -145,11 +146,11 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                      name="title"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Name</FormLabel>
+                           <FormLabel>Tên Danh Mục</FormLabel>
                            <FormControl>
                               <Input
                                  disabled={loading}
-                                 placeholder="Category name"
+                                 placeholder="Tên danh mục"
                                  {...field}
                               />
                            </FormControl>
@@ -160,6 +161,23 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                   <FormField
                      control={form.control}
                      name="description"
+                     render={({ field }) => (
+                        <FormItem>
+                           <FormLabel>Mô Tả</FormLabel>
+                           <FormControl>
+                              <Input
+                                 disabled={loading}
+                                 placeholder="Mô tả danh mục"
+                                 {...field}
+                              />
+                           </FormControl>
+                           <FormMessage />
+                        </FormItem>
+                     )}
+                  />
+                  <FormField
+                     control={form.control}
+                     name="bannerId"
                      render={({ field }) => (
                         <FormItem>
                            <FormLabel>Banner</FormLabel>
@@ -173,7 +191,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                                  <SelectTrigger>
                                     <SelectValue
                                        defaultValue={field.value}
-                                       placeholder="Select a banner"
+                                       placeholder="Chọn banner"
                                     />
                                  </SelectTrigger>
                               </FormControl>

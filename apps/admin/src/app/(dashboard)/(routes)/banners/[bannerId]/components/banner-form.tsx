@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { Trash } from 'lucide-react'
 import { Banner } from '@prisma/client'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -22,7 +22,6 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { Heading } from '@/components/ui/heading'
 import { AlertModal } from '@/components/modals/alert-modal'
-import ImageUpload from '@/components/ui/image-upload'
 
 const formSchema = z.object({
    label: z.string().min(1),
@@ -37,15 +36,14 @@ interface BannerFormProps {
 
 export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
    const params = useParams()
-   const router = useRouter()
 
    const [open, setOpen] = useState(false)
    const [loading, setLoading] = useState(false)
 
-   const title = initialData ? 'Edit banner' : 'Create banner'
-   const description = initialData ? 'Edit a banner.' : 'Add a new banner'
-   const toastMessage = initialData ? 'Banner updated.' : 'Banner created.'
-   const action = initialData ? 'Save changes' : 'Create'
+   const title = initialData ? 'Chỉnh Sửa Banner' : 'Tạo Banner Mới'
+   const description = initialData ? 'Chỉnh sửa thông tin banner.' : 'Thêm banner mới'
+   const toastMessage = initialData ? 'Banner đã được cập nhật.' : 'Banner đã được tạo.'
+   const action = initialData ? 'Lưu thay đổi' : 'Tạo mới'
 
    const form = useForm<BannerFormValues>({
       resolver: zodResolver(formSchema),
@@ -65,17 +63,16 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
                cache: 'no-store',
             })
          } else {
-            await fetch(`/banners`, {
+            await fetch(`/api/banners`, {
                method: 'POST',
                body: JSON.stringify(data),
                cache: 'no-store',
             })
          }
-         router.refresh()
-         router.push(`/banners`)
          toast.success(toastMessage)
+         window.location.assign('/banners')
       } catch (error: any) {
-         toast.error('Something went wrong.')
+         toast.error('Đã có lỗi xảy ra.')
       } finally {
          setLoading(false)
       }
@@ -84,19 +81,14 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
    const onDelete = async () => {
       try {
          setLoading(true)
-
          await fetch(`/api/banners/${params.bannerId}`, {
             method: 'DELETE',
             cache: 'no-store',
          })
-
-         router.refresh()
-         router.push(`/banners`)
-         toast.success('Banner deleted.')
+         toast.success('Banner đã được xoá.')
+         window.location.assign('/banners')
       } catch (error: any) {
-         toast.error(
-            'Make sure you removed all categories using this banner first.'
-         )
+         toast.error('Hãy xoá tất cả danh mục dùng banner này trước.')
       } finally {
          setLoading(false)
          setOpen(false)
@@ -135,13 +127,12 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
                   name="image"
                   render={({ field }) => (
                      <FormItem>
-                        <FormLabel>Background image</FormLabel>
+                        <FormLabel>URL Hình Ảnh</FormLabel>
                         <FormControl>
-                           <ImageUpload
-                              value={field.value ? [field.value] : []}
+                           <Input
                               disabled={loading}
-                              onChange={(url) => field.onChange(url)}
-                              onRemove={() => field.onChange('')}
+                              placeholder="https://example.com/image.jpg"
+                              {...field}
                            />
                         </FormControl>
                         <FormMessage />
@@ -154,11 +145,11 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
                      name="label"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Label</FormLabel>
+                           <FormLabel>Nhãn Banner</FormLabel>
                            <FormControl>
                               <Input
                                  disabled={loading}
-                                 placeholder="Banner label"
+                                 placeholder="Nhãn banner"
                                  {...field}
                               />
                            </FormControl>

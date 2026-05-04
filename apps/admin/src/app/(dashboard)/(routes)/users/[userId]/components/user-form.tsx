@@ -14,16 +14,16 @@ import {
 import { Input } from '@/components/ui/input'
 import type { UserWithIncludes } from '@/types/prisma'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import * as z from 'zod'
 
 const formSchema = z.object({
-   name: z.string().min(1),
-   email: z.string().min(1),
-   phone: z.string().min(1),
+   name: z.string().optional(),
+   email: z.string().optional(),
+   phone: z.string().optional(),
    isBanned: z.boolean().default(false).optional(),
 })
 
@@ -35,23 +35,16 @@ interface UserFormProps {
 
 export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
    const params = useParams()
-   const router = useRouter()
-
    const [loading, setLoading] = useState(false)
-
-   const toastMessage = 'User updated.'
-   const action = 'Save changes'
 
    const defaultValues = initialData
       ? {
-           ...initialData,
+           name: initialData.name ?? '',
+           email: initialData.email ?? '',
+           phone: initialData.phone ?? '',
+           isBanned: initialData.isBanned,
         }
-      : {
-           name: '---',
-           phone: '---',
-           email: '---',
-           isBanned: false,
-        }
+      : { name: '', email: '', phone: '', isBanned: false }
 
    const form = useForm<UserFormValues>({
       resolver: zodResolver(formSchema),
@@ -61,26 +54,15 @@ export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
    const onSubmit = async (data: UserFormValues) => {
       try {
          setLoading(true)
-
-         if (initialData) {
-            await fetch(`/api/products/${params.productId}`, {
-               method: 'PATCH',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
-         } else {
-            await fetch(`/api/products`, {
-               method: 'POST',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
-         }
-
-         router.refresh()
-         router.push(`/products`)
-         toast.success(toastMessage)
+         await fetch(`/api/users/${params.userId}`, {
+            method: 'PATCH',
+            body: JSON.stringify(data),
+            cache: 'no-store',
+         })
+         window.location.assign(`/users`)
+         toast.success('Người dùng đã được cập nhật.')
       } catch (error: any) {
-         toast.error('Something went wrong.')
+         toast.error('Đã có lỗi xảy ra.')
       } finally {
          setLoading(false)
       }
@@ -88,22 +70,15 @@ export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
 
    return (
       <Form {...form}>
-         <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-2 w-full"
-         >
+         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 w-full">
             <FormField
                control={form.control}
                name="name"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Name</FormLabel>
+                     <FormLabel>Họ Tên</FormLabel>
                      <FormControl>
-                        <Input
-                           disabled={loading}
-                           placeholder="Full Name"
-                           {...field}
-                        />
+                        <Input disabled={loading} placeholder="Họ và tên" {...field} />
                      </FormControl>
                      <FormMessage />
                   </FormItem>
@@ -116,11 +91,7 @@ export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
                   <FormItem>
                      <FormLabel>Email</FormLabel>
                      <FormControl>
-                        <Input
-                           disabled={loading}
-                           placeholder="Email"
-                           {...field}
-                        />
+                        <Input disabled={loading} placeholder="Email" {...field} />
                      </FormControl>
                      <FormMessage />
                   </FormItem>
@@ -131,13 +102,9 @@ export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
                name="phone"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Phone</FormLabel>
+                     <FormLabel>Số Điện Thoại</FormLabel>
                      <FormControl>
-                        <Input
-                           disabled={loading}
-                           placeholder="Phone"
-                           {...field}
-                        />
+                        <Input disabled={loading} placeholder="Số điện thoại" {...field} />
                      </FormControl>
                      <FormMessage />
                   </FormItem>
@@ -155,18 +122,16 @@ export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
                         />
                      </FormControl>
                      <div className="space-y-1 leading-none">
-                        <FormLabel>Banned</FormLabel>
+                        <FormLabel>Bị Cấm</FormLabel>
                         <FormDescription>
-                           This user will not be able to submit reviews or
-                           orders.
+                           Người dùng này sẽ không thể đặt hàng hoặc đánh giá sản phẩm.
                         </FormDescription>
                      </div>
                   </FormItem>
                )}
             />
-
             <Button disabled={loading} className="ml-auto" type="submit">
-               {action}
+               Lưu thay đổi
             </Button>
          </form>
       </Form>

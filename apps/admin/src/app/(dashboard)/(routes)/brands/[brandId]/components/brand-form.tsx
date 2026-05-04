@@ -16,7 +16,7 @@ import { Separator } from '@/components/ui/separator'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Brand } from '@prisma/client'
 import { Trash } from 'lucide-react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
@@ -25,7 +25,7 @@ import * as z from 'zod'
 const formSchema = z.object({
    title: z.string().min(2),
    description: z.string().min(1).optional(),
-   logo: z.string().url().optional(),
+   logo: z.string().optional(),
 })
 
 type BrandFormValues = z.infer<typeof formSchema>
@@ -36,15 +36,14 @@ interface BrandFormProps {
 
 export const BrandForm: React.FC<BrandFormProps> = ({ initialData }) => {
    const params = useParams()
-   const router = useRouter()
 
    const [open, setOpen] = useState(false)
    const [loading, setLoading] = useState(false)
 
-   const title = initialData ? 'Edit Brand' : 'Create Brand'
-   const description = initialData ? 'Edit a brand.' : 'Add a new brand'
-   const toastMessage = initialData ? 'Brand updated.' : 'Brand created.'
-   const action = initialData ? 'Save changes' : 'Create'
+   const title = initialData ? 'Chỉnh Sửa Thương Hiệu' : 'Tạo Thương Hiệu Mới'
+   const description = initialData ? 'Chỉnh sửa thông tin thương hiệu.' : 'Thêm thương hiệu mới'
+   const toastMessage = initialData ? 'Thương hiệu đã được cập nhật.' : 'Thương hiệu đã được tạo.'
+   const action = initialData ? 'Lưu thay đổi' : 'Tạo mới'
 
    const form = useForm<BrandFormValues>({
       resolver: zodResolver(formSchema),
@@ -71,11 +70,10 @@ export const BrandForm: React.FC<BrandFormProps> = ({ initialData }) => {
                cache: 'no-store',
             })
          }
-         router.refresh()
-         router.push(`/brands`)
+         window.location.assign(`/brands`)
          toast.success(toastMessage)
       } catch (error: any) {
-         toast.error('Something went wrong.')
+         toast.error('Đã có lỗi xảy ra.')
       } finally {
          setLoading(false)
       }
@@ -84,19 +82,14 @@ export const BrandForm: React.FC<BrandFormProps> = ({ initialData }) => {
    const onDelete = async () => {
       try {
          setLoading(true)
-
          await fetch(`/api/brands/${params.brandId}`, {
             method: 'DELETE',
             cache: 'no-store',
          })
-
-         router.refresh()
-         router.push(`/brands`)
-         toast.success('Brand deleted.')
+         window.location.assign(`/brands`)
+         toast.success('Thương hiệu đã được xoá.')
       } catch (error: any) {
-         toast.error(
-            'Make sure you removed all products using this brand first.'
-         )
+         toast.error('Hãy xoá tất cả sản phẩm thuộc thương hiệu này trước.')
       } finally {
          setLoading(false)
          setOpen(false)
@@ -136,11 +129,11 @@ export const BrandForm: React.FC<BrandFormProps> = ({ initialData }) => {
                      name="title"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Title</FormLabel>
+                           <FormLabel>Tên Thương Hiệu</FormLabel>
                            <FormControl>
                               <Input
                                  disabled={loading}
-                                 placeholder="Brand title"
+                                 placeholder="Tên thương hiệu"
                                  {...field}
                               />
                            </FormControl>
@@ -153,11 +146,11 @@ export const BrandForm: React.FC<BrandFormProps> = ({ initialData }) => {
                      name="description"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Description</FormLabel>
+                           <FormLabel>Mô Tả</FormLabel>
                            <FormControl>
                               <Input
                                  disabled={loading}
-                                 placeholder="Brand description"
+                                 placeholder="Mô tả thương hiệu"
                                  {...field}
                               />
                            </FormControl>

@@ -12,44 +12,63 @@ import {
    FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import {
+   Select,
+   SelectContent,
+   SelectItem,
+   SelectTrigger,
+   SelectValue,
+} from '@/components/ui/select'
 import type { OrderWithIncludes } from '@/types/prisma'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import * as z from 'zod'
 
+const ORDER_STATUSES = [
+   'Processing',
+   'Shipped',
+   'Delivered',
+   'ReturnProcessing',
+   'ReturnCompleted',
+   'Cancelled',
+   'RefundProcessing',
+   'RefundCompleted',
+   'Denied',
+]
+
 const formSchema = z.object({
    status: z.string().min(1),
-   shipping: z.coerce.number().min(1),
-   payable: z.coerce.number().min(1),
+   shipping: z.coerce.number().min(0),
+   payable: z.coerce.number().min(0),
    discount: z.coerce.number().min(0),
    isPaid: z.boolean().default(false).optional(),
    isCompleted: z.boolean().default(false).optional(),
 })
 
-type ProductFormValues = z.infer<typeof formSchema>
+type OrderFormValues = z.infer<typeof formSchema>
 
-interface ProductFormProps {
+interface OrderFormProps {
    initialData: OrderWithIncludes | null
 }
 
-export const OrderForm: React.FC<ProductFormProps> = ({ initialData }) => {
+export const OrderForm: React.FC<OrderFormProps> = ({ initialData }) => {
    const params = useParams()
-   const router = useRouter()
-
    const [loading, setLoading] = useState(false)
-
-   const toastMessage = 'Order updated.'
-   const action = 'Save changes'
 
    const defaultValues = initialData
       ? {
-           ...initialData,
+           status: initialData.status,
+           shipping: Number(initialData.shipping),
+           payable: Number(initialData.payable),
+           discount: Number(initialData.discount),
+           isPaid: initialData.isPaid,
+           isCompleted: initialData.isCompleted,
         }
       : {
-           status: '---',
+           status: 'Processing',
            shipping: 0,
            payable: 0,
            discount: 0,
@@ -57,14 +76,15 @@ export const OrderForm: React.FC<ProductFormProps> = ({ initialData }) => {
            isCompleted: false,
         }
 
-   const form = useForm<ProductFormValues>({
+   const form = useForm<OrderFormValues>({
       resolver: zodResolver(formSchema),
       defaultValues,
    })
 
-   const onSubmit = async (data: ProductFormValues) => {
+   const onSubmit = async (data: OrderFormValues) => {
       try {
          setLoading(true)
+<<<<<<< Updated upstream
 
          if (initialData) {
             await fetch(`/api/products/${params.productId}`, {
@@ -83,8 +103,17 @@ export const OrderForm: React.FC<ProductFormProps> = ({ initialData }) => {
          router.refresh()
          router.push(`/products`)
          toast.success(toastMessage)
+=======
+         await fetch(`/api/orders/${params.orderId}`, {
+            method: 'PATCH',
+            body: JSON.stringify(data),
+            cache: 'no-store',
+         })
+         window.location.assign(`/orders`)
+         toast.success('Đơn hàng đã được cập nhật.')
+>>>>>>> Stashed changes
       } catch (error: any) {
-         toast.error('Something went wrong.')
+         toast.error('Đã có lỗi xảy ra.')
       } finally {
          setLoading(false)
       }
@@ -98,17 +127,41 @@ export const OrderForm: React.FC<ProductFormProps> = ({ initialData }) => {
          >
             <FormField
                control={form.control}
+               name="status"
+               render={({ field }) => (
+                  <FormItem>
+                     <FormLabel>Trạng Thái</FormLabel>
+                     <Select
+                        disabled={loading}
+                        onValueChange={field.onChange}
+                        value={field.value}
+                        defaultValue={field.value}
+                     >
+                        <FormControl>
+                           <SelectTrigger>
+                              <SelectValue placeholder="Chọn trạng thái" />
+                           </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                           {ORDER_STATUSES.map((s) => (
+                              <SelectItem key={s} value={s}>
+                                 {s}
+                              </SelectItem>
+                           ))}
+                        </SelectContent>
+                     </Select>
+                     <FormMessage />
+                  </FormItem>
+               )}
+            />
+            <FormField
+               control={form.control}
                name="shipping"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Price</FormLabel>
+                     <FormLabel>Phí Vận Chuyển (VNĐ)</FormLabel>
                      <FormControl>
-                        <Input
-                           type="number"
-                           disabled={loading}
-                           placeholder="9.99"
-                           {...field}
-                        />
+                        <Input type="number" disabled={loading} {...field} />
                      </FormControl>
                      <FormMessage />
                   </FormItem>
@@ -119,14 +172,9 @@ export const OrderForm: React.FC<ProductFormProps> = ({ initialData }) => {
                name="payable"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Discount</FormLabel>
+                     <FormLabel>Tổng Thanh Toán (VNĐ)</FormLabel>
                      <FormControl>
-                        <Input
-                           type="number"
-                           disabled={loading}
-                           placeholder="9.99"
-                           {...field}
-                        />
+                        <Input type="number" disabled={loading} {...field} />
                      </FormControl>
                      <FormMessage />
                   </FormItem>
@@ -137,14 +185,9 @@ export const OrderForm: React.FC<ProductFormProps> = ({ initialData }) => {
                name="discount"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Discount</FormLabel>
+                     <FormLabel>Giảm Giá (VNĐ)</FormLabel>
                      <FormControl>
-                        <Input
-                           type="number"
-                           disabled={loading}
-                           placeholder="9.99"
-                           {...field}
-                        />
+                        <Input type="number" disabled={loading} {...field} />
                      </FormControl>
                      <FormMessage />
                   </FormItem>
@@ -162,9 +205,9 @@ export const OrderForm: React.FC<ProductFormProps> = ({ initialData }) => {
                         />
                      </FormControl>
                      <div className="space-y-1 leading-none">
-                        <FormLabel>Featured</FormLabel>
+                        <FormLabel>Đã Thanh Toán</FormLabel>
                         <FormDescription>
-                           This product will appear on the home page
+                           Đánh dấu đơn hàng đã được thanh toán.
                         </FormDescription>
                      </div>
                   </FormItem>
@@ -182,16 +225,16 @@ export const OrderForm: React.FC<ProductFormProps> = ({ initialData }) => {
                         />
                      </FormControl>
                      <div className="space-y-1 leading-none">
-                        <FormLabel>Available</FormLabel>
+                        <FormLabel>Hoàn Thành</FormLabel>
                         <FormDescription>
-                           This product will appear in the store.
+                           Đánh dấu đơn hàng đã hoàn thành.
                         </FormDescription>
                      </div>
                   </FormItem>
                )}
             />
             <Button disabled={loading} className="ml-auto" type="submit">
-               {action}
+               Lưu thay đổi
             </Button>
          </form>
       </Form>
