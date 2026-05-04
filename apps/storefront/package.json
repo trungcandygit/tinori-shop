@@ -10,7 +10,7 @@
       "build": "next build",
       "start": "next start",
       "lint": "next lint",
-      "postinstall": "prisma generate",
+      "postinstall": "npx prisma generate",
       "update": "npx npm-check-updates -u",
       "db:generate": "npx prisma generate",
       "db:format": "npx prisma format",
