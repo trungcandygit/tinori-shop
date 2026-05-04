@@ -5,44 +5,44 @@ import Link from 'next/link'
 
 const data = [
    {
-      label: 'LEGAL',
+      label: 'PHÁP LÝ',
       links: [
          {
-            label: 'Privacy Policy',
+            label: 'Chính Sách Bảo Mật',
             url: '/privacy',
          },
          {
-            label: 'Terms & Conditions',
+            label: 'Điều Khoản Dịch Vụ',
             url: '/terms',
          },
       ],
    },
    {
-      label: 'RESOURCES',
+      label: 'TÀI NGUYÊN',
       links: [
          {
-            label: 'Blog',
+            label: 'Blog Thời Trang',
             url: '/blog',
          },
          {
-            label: 'About',
+            label: 'Giới Thiệu',
             url: '/about',
          },
          {
-            label: 'Contact',
+            label: 'Liên Hệ',
             url: '/contact',
          },
       ],
    },
    {
-      label: 'SUPPORT',
+      label: 'HỖ TRỢ',
       links: [
          {
-            label: 'Telegram',
-            url: '/telegram',
+            label: 'Zalo: 0912 345 678',
+            url: '/contact',
          },
          {
-            label: 'FAQ',
+            label: 'Câu Hỏi Thường Gặp',
             url: '/faq',
          },
       ],
@@ -95,8 +95,7 @@ function Trademark() {
                {config.name}
             </h2>
             <span className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
-               © {new Date().getFullYear()} {config.name}™ . All Rights
-               Reserved.
+               © {new Date().getFullYear()} {config.name}™ . Bảo lưu mọi quyền.
             </span>
          </span>
       </div>

@@ -8,19 +8,17 @@ interface DocsConfig {
 export const docsConfig: DocsConfig = {
    mainNav: [
       {
-         title: 'Documentation',
-         href: '/docs',
+         title: 'Sản Phẩm',
+         href: '/products',
       },
-
       {
-         title: 'GitHub',
-         href: 'https://github.com/sesto-dev',
-         external: true,
+         title: 'Blog Thời Trang',
+         href: '/blog',
       },
    ],
    sidebarNav: [
       {
-         title: 'Products',
+         title: 'Sản Phẩm',
          href: '/products',
       },
       {
@@ -28,19 +26,19 @@ export const docsConfig: DocsConfig = {
          href: '/blog',
       },
       {
-         title: 'Orders',
+         title: 'Đơn Hàng',
          href: '/profile/orders',
       },
       {
-         title: 'Payments',
+         title: 'Thanh Toán',
          href: '/profile/payments',
       },
       {
-         title: 'Contact',
+         title: 'Liên Hệ',
          href: '/contact',
       },
       {
-         title: 'About',
+         title: 'Giới Thiệu',
          href: '/about',
       },
    ],

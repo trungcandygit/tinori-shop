@@ -13,42 +13,42 @@ export function MainNav({
    const routes = [
       {
          href: `/banners`,
-         label: 'Banners',
+         label: 'Banner',
          active: pathname.includes(`/banners`),
       },
       {
          href: `/categories`,
-         label: 'Categories',
+         label: 'Danh mục',
          active: pathname.includes(`/categories`),
       },
       {
          href: `/products`,
-         label: 'Products',
+         label: 'Sản phẩm',
          active: pathname.includes(`/products`),
       },
       {
          href: `/orders`,
-         label: 'Orders',
+         label: 'Đơn hàng',
          active: pathname.includes(`/orders`),
       },
       {
          href: `/payments`,
-         label: 'Payments',
+         label: 'Thanh toán',
          active: pathname.includes(`/payments`),
       },
       {
          href: `/users`,
-         label: 'Users',
+         label: 'Khách hàng',
          active: pathname.includes(`/users`),
       },
       {
          href: `/brands`,
-         label: 'Brands',
+         label: 'Thương hiệu',
          active: pathname.includes(`/brands`),
       },
       {
          href: `/codes`,
-         label: 'Codes',
+         label: 'Mã giảm giá',
          active: pathname.includes(`/codes`),
       },
    ]

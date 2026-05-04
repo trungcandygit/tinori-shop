@@ -61,10 +61,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({
    const [open, setOpen] = useState(false)
    const [loading, setLoading] = useState(false)
 
-   const title = initialData ? 'Edit product' : 'Create product'
-   const description = initialData ? 'Edit a product.' : 'Add a new product'
-   const toastMessage = initialData ? 'Product updated.' : 'Product created.'
-   const action = initialData ? 'Save changes' : 'Create'
+   const title = initialData ? 'Chỉnh Sửa Sản Phẩm' : 'Tạo Sản Phẩm Mới'
+   const description = initialData ? 'Chỉnh sửa thông tin sản phẩm.' : 'Thêm sản phẩm mới vào cửa hàng'
+   const toastMessage = initialData ? 'Sản phẩm đã được cập nhật.' : 'Sản phẩm đã được tạo.'
+   const action = initialData ? 'Lưu thay đổi' : 'Tạo mới'
 
    const defaultValues = initialData
       ? {
@@ -111,7 +111,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
          router.push(`/products`)
          toast.success(toastMessage)
       } catch (error: any) {
-         toast.error('Something went wrong.')
+         toast.error('Đã có lỗi xảy ra.')
       } finally {
          setLoading(false)
       }
@@ -128,9 +128,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
          router.refresh()
          router.push(`/products`)
-         toast.success('Product deleted.')
+         toast.success('Sản phẩm đã được xoá.')
       } catch (error: any) {
-         toast.error('Something went wrong.')
+         toast.error('Đã có lỗi xảy ra.')
       } finally {
          setLoading(false)
          setOpen(false)
@@ -169,7 +169,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                   name="images"
                   render={({ field }) => (
                      <FormItem>
-                        <FormLabel>Images</FormLabel>
+                        <FormLabel>Hình Ảnh</FormLabel>
                         <FormControl>
                            <ImageUpload
                               value={field.value.map((image) => image)}
@@ -196,11 +196,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                      name="title"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Name</FormLabel>
+                           <FormLabel>Tên Sản Phẩm</FormLabel>
                            <FormControl>
                               <Input
                                  disabled={loading}
-                                 placeholder="Product title"
+                                 placeholder="Tên sản phẩm"
                                  {...field}
                               />
                            </FormControl>
@@ -213,7 +213,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                      name="price"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Price</FormLabel>
+                           <FormLabel>Giá (VNĐ)</FormLabel>
                            <FormControl>
                               <Input
                                  type="number"
@@ -231,7 +231,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                      name="discount"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Discount</FormLabel>
+                           <FormLabel>Giảm Giá (VNĐ)</FormLabel>
                            <FormControl>
                               <Input
                                  type="number"
@@ -249,7 +249,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                      name="stock"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Stock</FormLabel>
+                           <FormLabel>Số Lượng Kho</FormLabel>
                            <FormControl>
                               <Input
                                  type="number"
@@ -267,7 +267,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                      name="categoryId"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Category</FormLabel>
+                           <FormLabel>Danh Mục</FormLabel>
                            <Select
                               disabled={loading}
                               onValueChange={field.onChange}
@@ -278,7 +278,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                                  <SelectTrigger>
                                     <SelectValue
                                        defaultValue={field.value}
-                                       placeholder="Select a category"
+                                       placeholder="Chọn danh mục"
                                     />
                                  </SelectTrigger>
                               </FormControl>
@@ -309,9 +309,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                               />
                            </FormControl>
                            <div className="space-y-1 leading-none">
-                              <FormLabel>Featured</FormLabel>
+                              <FormLabel>Nổi Bật</FormLabel>
                               <FormDescription>
-                                 This product will appear on the home page
+                                 Sản phẩm sẽ xuất hiện trên trang chủ
                               </FormDescription>
                            </div>
                         </FormItem>
@@ -329,9 +329,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                               />
                            </FormControl>
                            <div className="space-y-1 leading-none">
-                              <FormLabel>Available</FormLabel>
+                              <FormLabel>Đang Bán</FormLabel>
                               <FormDescription>
-                                 This product will appear in the store.
+                                 Sản phẩm sẽ hiển thị trong cửa hàng.
                               </FormDescription>
                            </div>
                         </FormItem>

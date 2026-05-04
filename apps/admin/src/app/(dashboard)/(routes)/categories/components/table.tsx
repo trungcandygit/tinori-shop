@@ -16,11 +16,11 @@ export type CategoryColumn = {
 export const columns: ColumnDef<CategoryColumn>[] = [
    {
       accessorKey: 'title',
-      header: 'Title',
+      header: 'Tên Danh Mục',
    },
    {
       accessorKey: 'products',
-      header: 'Products #',
+      header: 'Số Sản Phẩm',
    },
    {
       id: 'actions',

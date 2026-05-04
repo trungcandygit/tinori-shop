@@ -4,8 +4,8 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-   title: 'Authentication',
-   description: 'Authentication forms built using the components.',
+   title: 'Đăng nhập',
+   description: 'Trang đăng nhập quản trị viên Tinori.',
 }
 
 export default function AuthenticationPage() {
@@ -34,11 +34,11 @@ export default function AuthenticationPage() {
             <div className="relative z-20 mt-auto">
                <blockquote className="space-y-2">
                   <p className="text-lg">
-                     &ldquo;This library has saved me countless hours of work
-                     and helped me deliver stunning designs to my clients faster
-                     than ever before.&rdquo;
+                     &ldquo;Hệ thống quản lý cửa hàng Tinori giúp tôi tiết kiệm
+                     hàng giờ làm việc mỗi ngày và quản lý đơn hàng hiệu quả
+                     hơn bao giờ hết.&rdquo;
                   </p>
-                  <footer className="text-sm">Sofia Davis</footer>
+                  <footer className="text-sm">Nguyễn Thị Lan - Chủ shop thời trang</footer>
                </blockquote>
             </div>
          </div>
@@ -46,27 +46,27 @@ export default function AuthenticationPage() {
             <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
                <div className="flex flex-col space-y-2 text-center">
                   <h1 className="text-2xl font-semibold tracking-tight">
-                     Login
+                     Đăng nhập
                   </h1>
                   <p className="text-sm text-muted-foreground">
-                     Enter your email below to create or login your account.
+                     Nhập email của bạn để đăng nhập vào trang quản trị.
                   </p>
                </div>
                <UserAuthForm />
                <p className="px-8 text-center text-sm text-muted-foreground">
-                  By clicking continue, you agree to our{' '}
+                  Bằng cách tiếp tục, bạn đồng ý với{' '}
                   <Link
                      href="/terms"
                      className="underline underline-offset-4 hover:text-primary"
                   >
-                     Terms of Service
+                     Điều Khoản Dịch Vụ
                   </Link>{' '}
-                  and{' '}
+                  và{' '}
                   <Link
                      href="/privacy"
                      className="underline underline-offset-4 hover:text-primary"
                   >
-                     Privacy Policy
+                     Chính Sách Bảo Mật
                   </Link>
                   .
                </p>

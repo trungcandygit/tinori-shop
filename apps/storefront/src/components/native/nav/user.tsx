@@ -52,42 +52,42 @@ export function UserNav() {
                <Link href="/profile/addresses">
                   <DropdownMenuItem className="flex gap-2">
                      <MapPinIcon className="h-4" />
-                     Edit Addresses
+                     Địa Chỉ Giao Hàng
                   </DropdownMenuItem>
                </Link>
                <Link href="/profile/edit">
                   <DropdownMenuItem className="flex gap-2">
                      <UserIcon className="h-4" />
-                     Edit Profile
+                     Chỉnh Sửa Hồ Sơ
                   </DropdownMenuItem>
                </Link>
                <Link href="/profile/orders">
                   <DropdownMenuItem className="flex gap-2">
                      <ListOrderedIcon className="h-4" />
-                     Orders
+                     Đơn Hàng Của Tôi
                   </DropdownMenuItem>
                </Link>
                <Link href="/profile/payments">
                   <DropdownMenuItem className="flex gap-2">
                      <CreditCardIcon className="h-4" />
-                     Payments
+                     Lịch Sử Thanh Toán
                   </DropdownMenuItem>
                </Link>
                <DropdownMenuSeparator />
                <Link href="/cart">
                   <DropdownMenuItem className="flex gap-2">
-                     <ShoppingBasketIcon className="h-4" /> Cart
+                     <ShoppingBasketIcon className="h-4" /> Giỏ Hàng
                   </DropdownMenuItem>
                </Link>
                <Link href="/wishlist">
                   <DropdownMenuItem className="flex gap-2">
-                     <HeartIcon className="h-4" /> Wishlist
+                     <HeartIcon className="h-4" /> Yêu Thích
                   </DropdownMenuItem>
                </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="flex gap-2" onClick={onLogout}>
-               <LogOutIcon className="h-4" /> Logout
+               <LogOutIcon className="h-4" /> Đăng Xuất
             </DropdownMenuItem>
          </DropdownMenuContent>
       </DropdownMenu>

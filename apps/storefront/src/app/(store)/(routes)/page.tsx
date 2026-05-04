@@ -30,8 +30,8 @@ export default async function Index() {
          <Carousel images={banners.map((obj) => obj.image)} />
          <Separator className="my-8" />
          <Heading
-            title="Products"
-            description="Below is a list of products we have available for you."
+            title="Sản Phẩm Nổi Bật"
+            description="Khám phá hàng ngàn sản phẩm thời trang chất lượng cao tại Tinori."
          />
          {isVariableValid(products) ? (
             <ProductGrid products={products} />

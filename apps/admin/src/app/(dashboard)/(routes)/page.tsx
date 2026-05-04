@@ -18,13 +18,13 @@ export default async function DashboardPage() {
    return (
       <div className="flex-col">
          <div className="flex-1 space-y-4 pt-4">
-            <Heading title="Dashboard" description="Overview of your store" />
+            <Heading title="Tổng Quan" description="Thống kê tổng quan cửa hàng của bạn" />
             <Separator />
             <div className="grid gap-4 grid-cols-3">
                <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                      <CardTitle className="text-sm font-medium">
-                        Total Revenue
+                        Tổng Doanh Thu
                      </CardTitle>
                      <DollarSign className="h-4 text-muted-foreground" />
                   </CardHeader>
@@ -37,7 +37,7 @@ export default async function DashboardPage() {
                <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                      <CardTitle className="text-sm font-medium">
-                        Sales
+                        Đơn Bán Hàng
                      </CardTitle>
                      <CreditCard className="h-4 text-muted-foreground" />
                   </CardHeader>
@@ -48,7 +48,7 @@ export default async function DashboardPage() {
                <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                      <CardTitle className="text-sm font-medium">
-                        Products In Stock
+                        Sản Phẩm Trong Kho
                      </CardTitle>
                      <Package className="h-4 text-muted-foreground" />
                   </CardHeader>
@@ -59,7 +59,7 @@ export default async function DashboardPage() {
             </div>
             <Card className="col-span-4">
                <CardHeader>
-                  <CardTitle>Overview</CardTitle>
+                  <CardTitle>Biểu Đồ Doanh Thu</CardTitle>
                </CardHeader>
                <CardContent className="pl-2">
                   <Overview data={graphRevenue} />

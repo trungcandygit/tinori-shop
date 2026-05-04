@@ -30,27 +30,27 @@ export type ProductColumn = {
 export const columns: ColumnDef<ProductColumn>[] = [
    {
       accessorKey: 'title',
-      header: 'Title',
+      header: 'Tên Sản Phẩm',
    },
    {
       accessorKey: 'price',
-      header: 'Price',
+      header: 'Giá',
    },
    {
       accessorKey: 'discount',
-      header: 'Discount',
+      header: 'Giảm Giá',
    },
    {
       accessorKey: 'category',
-      header: 'Category',
+      header: 'Danh Mục',
    },
    {
       accessorKey: 'sales',
-      header: 'Sales #',
+      header: 'Đã Bán',
    },
    {
       accessorKey: 'isAvailable',
-      header: 'Availability',
+      header: 'Trạng Thái',
       cell: (props) => (props.cell.getValue() ? <CheckIcon /> : <XIcon />),
    },
    {

@@ -35,7 +35,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
                <span className="bg-background px-2 text-muted-foreground">
-                  Or continue with
+                  Hoặc tiếp tục với
                </span>
             </div>
          </div>
@@ -81,7 +81,7 @@ function ChangeMethodButton({ isLoading }) {
          ) : (
             <SmartphoneIcon className="mr-2 h-4" />
          )}
-         Phone Number
+         Số Điện Thoại
       </Button>
    )
 }
@@ -178,11 +178,11 @@ function TryComponents({ isLoading, setIsLoading, setFetchedOTP }) {
                   className="text-sm font-light text-foreground/60"
                   htmlFor="email"
                >
-                  Phone
+                  Số Điện Thoại
                </Label>
                <Input
                   id="phone"
-                  placeholder="+989123456789"
+                  placeholder="+84912345678"
                   type="phone"
                   autoCapitalize="none"
                   autoComplete="phone"
@@ -193,7 +193,7 @@ function TryComponents({ isLoading, setIsLoading, setFetchedOTP }) {
                />
                {isVariableValid(phone) && !isIranianPhoneNumberValid(phone) && (
                   <p className="mt-2 text-sm text-red-700">
-                     Phone Number is not valid.
+                     Số điện thoại không hợp lệ.
                   </p>
                )}
             </div>
@@ -202,7 +202,7 @@ function TryComponents({ isLoading, setIsLoading, setFetchedOTP }) {
                disabled={isLoading || !isIranianPhoneNumberValid(phone)}
             >
                {isLoading && <Loader className="mr-2 h-4 animate-spin" />}
-               Login with Phone
+               Đăng nhập bằng SĐT
             </Button>
          </>
       )
@@ -218,7 +218,7 @@ function TryComponents({ isLoading, setIsLoading, setFetchedOTP }) {
             </Label>
             <Input
                id="email"
-               placeholder="name@example.com"
+               placeholder="ten@example.com"
                type="email"
                autoCapitalize="none"
                autoComplete="email"
@@ -233,7 +233,7 @@ function TryComponents({ isLoading, setIsLoading, setFetchedOTP }) {
             disabled={isLoading || !isEmailValid(email)}
          >
             {isLoading && <Loader className="mr-2 h-4 animate-spin" />}
-            Login with Email
+            Đăng nhập bằng Email
          </Button>
       </>
    )
@@ -294,10 +294,10 @@ function VerifyComponents({ isLoading, setIsLoading }) {
                className="text-sm font-light text-foreground/60"
                htmlFor="email"
             >
-               One-Time Password
+               Mã Xác Nhận (OTP)
             </Label>
             <Input
-               placeholder="12345"
+               placeholder="123456"
                disabled={isLoading}
                onChange={handleOTPChange}
                required
@@ -305,7 +305,7 @@ function VerifyComponents({ isLoading, setIsLoading }) {
          </div>
          <Button onClick={onVerifyOTP} disabled={isLoading}>
             {isLoading && <Loader className="mr-2 h-4 animate-spin" />}
-            Submit
+            Xác Nhận
          </Button>
       </>
    )

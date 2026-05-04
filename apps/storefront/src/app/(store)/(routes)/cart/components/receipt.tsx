@@ -39,27 +39,27 @@ export function Receipt() {
    return (
       <Card className={loading && 'animate-pulse'}>
          <CardHeader className="p-4 pb-0">
-            <h2 className="font-bold tracking-tight">Receipt</h2>
+            <h2 className="font-bold tracking-tight">Hoá Đơn</h2>
          </CardHeader>
          <CardContent className="p-4 text-sm">
             <div className="block space-y-[1vh]">
                <div className="flex justify-between">
-                  <p>Total Amount</p>
-                  <h3>${calculatePayableCost().totalAmount}</h3>
+                  <p>Tổng Tiền Hàng</p>
+                  <h3>{calculatePayableCost().totalAmount}đ</h3>
                </div>
                <div className="flex justify-between">
-                  <p>Discount Amount</p>
-                  <h3>${calculatePayableCost().discountAmount}</h3>
+                  <p>Giảm Giá</p>
+                  <h3>-{calculatePayableCost().discountAmount}đ</h3>
                </div>
                <div className="flex justify-between">
-                  <p>Tax Amount</p>
-                  <h3>${calculatePayableCost().taxAmount}</h3>
+                  <p>Thuế VAT (9%)</p>
+                  <h3>{calculatePayableCost().taxAmount}đ</h3>
                </div>
             </div>
             <Separator className="my-4" />
             <div className="flex justify-between">
-               <p>Payable Amount</p>
-               <h3>${calculatePayableCost().payableAmount}</h3>
+               <p>Tổng Thanh Toán</p>
+               <h3>{calculatePayableCost().payableAmount}đ</h3>
             </div>
          </CardContent>
          <Separator />
@@ -74,7 +74,7 @@ export function Receipt() {
                   }
                   className="w-full"
                >
-                  Checkout
+                  Thanh Toán
                </Button>
             </Link>
          </CardFooter>

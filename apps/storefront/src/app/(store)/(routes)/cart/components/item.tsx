@@ -176,7 +176,7 @@ export const Item = ({ cartItem }) => {
          )
 
       if (count === 0) {
-         return <Button onClick={onAddToCart}>🛒 Add to Cart</Button>
+         return <Button onClick={onAddToCart}>🛒 Thêm Vào Giỏ</Button>
       }
 
       if (count > 0) {

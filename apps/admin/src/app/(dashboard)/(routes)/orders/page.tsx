@@ -62,7 +62,7 @@ export default async function OrdersPage({ searchParams }) {
 
    const formattedOrders: OrderColumn[] = orders.map((order) => ({
       id: order.id,
-      number: `Order #${order.number}`,
+      number: `Đơn hàng #${order.number}`,
       date: order.createdAt.toUTCString(),
       payable: '$' + order.payable.toString(),
       isPaid: order.isPaid,
@@ -72,8 +72,8 @@ export default async function OrdersPage({ searchParams }) {
    return (
       <div className="block space-y-4 my-6">
          <Heading
-            title={`Orders (${orders.length})`}
-            description="Manage orders for your store"
+            title={`Đơn Hàng (${orders.length})`}
+            description="Quản lý đơn hàng của cửa hàng"
          />
          <Separator />
          <div className="grid grid-cols-4 gap-2">

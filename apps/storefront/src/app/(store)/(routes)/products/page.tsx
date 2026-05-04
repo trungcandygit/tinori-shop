@@ -48,8 +48,8 @@ export default async function Products({ searchParams }) {
    return (
       <>
          <Heading
-            title="Products"
-            description="Below is a list of products you have in your cart."
+            title="Tất Cả Sản Phẩm"
+            description="Khám phá toàn bộ bộ sưu tập thời trang tại Tinori."
          />
          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mb-4">
             <SortBy initialData={sort} />

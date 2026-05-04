@@ -34,13 +34,13 @@ export const DataSection = async ({
          <h3 className="mb-4 text-xl font-medium">{product.title}</h3>
          <Separator />
          <div className="flex gap-2 mb-2 items-center">
-            <p className="text-sm">Brand:</p>
+            <p className="text-sm">Thương hiệu:</p>
             <Link href={`/products?brand=${product?.brand?.title}`}>
                <Badge variant="outline">{product?.brand?.title}</Badge>
             </Link>
          </div>
          <div className="flex gap-2 items-center">
-            <p className="text-sm">Categories:</p>
+            <p className="text-sm">Danh mục:</p>
             {product.categories.map(({ title }, index) => (
                <Link key={index} href={`/products?categories=${title}`}>
                   <Badge variant="outline">{title}</Badge>

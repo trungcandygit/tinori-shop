@@ -9,8 +9,8 @@ export default function Cart() {
    return (
       <CartContextProvider>
          <Heading
-            title="Cart"
-            description="Below is a list of products you have in your cart."
+            title="Giỏ Hàng"
+            description="Danh sách sản phẩm trong giỏ hàng của bạn."
          />
          <CartGrid />
       </CartContextProvider>

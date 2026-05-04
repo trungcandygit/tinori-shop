@@ -24,12 +24,12 @@ export default async function CategoriesPage() {
       <div className="my-6 block space-y-4">
          <div className="flex items-center justify-between">
             <Heading
-               title={`Categories (${categories.length})`}
-               description="Manage categories for your store"
+               title={`Danh Mục (${categories.length})`}
+               description="Quản lý danh mục sản phẩm của cửa hàng"
             />
             <Link href="/categories/new">
                <Button>
-                  <Plus className="mr-2 h-4" /> Add New
+                  <Plus className="mr-2 h-4" /> Thêm Mới
                </Button>
             </Link>
          </div>

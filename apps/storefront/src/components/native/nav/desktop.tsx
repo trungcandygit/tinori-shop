@@ -16,10 +16,19 @@ import { forwardRef } from 'react'
 
 const components: { title: string; href: string; description: string }[] = [
    {
-      title: 'Alert Dialog',
-      href: '/docs/primitives/alert-dialog',
-      description:
-         'A modal dialog that interrupts the user with important content and expects a response.',
+      title: 'Thời Trang Nữ',
+      href: '/products?category=Váy & Đầm',
+      description: 'Váy đầm, áo kiểu, quần âu nữ thời trang.',
+   },
+   {
+      title: 'Thời Trang Nam',
+      href: '/products?category=Áo',
+      description: 'Áo sơ mi, áo thun, quần jean nam phong cách.',
+   },
+   {
+      title: 'Phụ Kiện',
+      href: '/products?category=Phụ Kiện',
+      description: 'Túi xách, mũ, thắt lưng và nhiều phụ kiện thời trang.',
    },
 ]
 
@@ -44,7 +53,7 @@ export function NavMenu() {
                <Link href="/products" legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                      <div className="font-normal text-foreground/70">
-                        Products
+                        Sản Phẩm
                      </div>
                   </NavigationMenuLink>
                </Link>
@@ -52,7 +61,7 @@ export function NavMenu() {
             <NavigationMenuItem>
                <NavigationMenuTrigger>
                   <div className="font-normal text-foreground/70">
-                     Categories
+                     Danh Mục
                   </div>
                </NavigationMenuTrigger>
                <NavigationMenuContent>
@@ -61,37 +70,32 @@ export function NavMenu() {
                         <NavigationMenuLink asChild>
                            <Link
                               className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                              href="/"
+                              href="/products"
                            >
                               <div className="mb-2 mt-4 text-lg font-medium">
-                                 shadcn/ui
+                                 Tinori
                               </div>
                               <p className="text-sm leading-tight text-muted-foreground">
-                                 Beautifully designed components built with
-                                 Radix UI and Tailwind CSS.
+                                 Thời trang chất lượng cao, phong cách hiện đại cho mọi dịp.
                               </p>
                            </Link>
                         </NavigationMenuLink>
                      </li>
-                     <ListItem href="/docs" title="Introduction">
-                        Re-usable components built using Radix UI and Tailwind
-                        CSS.
+                     <ListItem href="/products?category=Áo" title="Áo">
+                        Áo sơ mi, áo thun, áo khoác đa dạng mẫu mã.
                      </ListItem>
-                     <ListItem href="/docs/installation" title="Installation">
-                        How to install dependencies and structure your app.
+                     <ListItem href="/products?category=Quần" title="Quần">
+                        Quần jean, quần âu, quần thể thao cho mọi phong cách.
                      </ListItem>
-                     <ListItem
-                        href="/docs/primitives/typography"
-                        title="Typography"
-                     >
-                        Styles for headings, paragraphs, lists...etc
+                     <ListItem href="/products?category=Váy & Đầm" title="Váy & Đầm">
+                        Váy maxi, đầm công sở, đầm dự tiệc sang trọng.
                      </ListItem>
                   </ul>
                </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
                <NavigationMenuTrigger>
-                  <div className="font-normal text-foreground/70">Brands</div>
+                  <div className="font-normal text-foreground/70">Thương Hiệu</div>
                </NavigationMenuTrigger>
                <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">

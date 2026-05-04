@@ -33,149 +33,179 @@ async function main() {
    let createdProducts = [],
       createdProviders = []
 
-   const providers = ['Parsian', 'Pasargad', 'Dey']
+   const providers = ['VNPay', 'MoMo', 'ZaloPay']
 
-   const owners = ['sesto@post.com']
+   const owners = ['admin@tinori.vn']
 
    const categories = [
-      'Electronics',
-      'Clothing',
-      'Books',
-      'Home & Kitchen',
-      'Toys',
-      'Jewelery',
-      'Accessories',
+      'Áo',
+      'Quần',
+      'Váy & Đầm',
+      'Phụ Kiện',
+      'Giày Dép',
+      'Túi Xách',
+      'Đồ Thể Thao',
    ]
 
    const products = [
       {
-         title: 'BKID Pipe',
-         brand: 'BKID',
-         categories: ['Accessories'],
-         keywords: ['pipe', 'brushed', 'wood'],
-         price: 69.99,
-         images: ['https://lemanoosh.com/app/uploads/bkid-pipe-01.jpg'],
+         title: 'Áo Sơ Mi Trắng Cổ Điển',
+         brand: 'Tinori Fashion',
+         categories: ['Áo'],
+         keywords: ['áo sơ mi', 'trắng', 'cổ điển', 'công sở'],
+         price: 350000,
+         discount: 0,
+         stock: 25,
+         description: 'Áo sơ mi trắng cổ điển, chất liệu cotton 100%, phù hợp đi làm và dạo phố. Form dáng chuẩn, thoáng mát, dễ phối đồ.',
+         images: ['https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800'],
       },
       {
-         title: 'Bang and Olufsen Speaker',
-         brand: 'Bang and Olufsen',
-         categories: ['Electronics'],
-         keywords: ['speaker', 'brushed', 'mechanical'],
-         price: 9.99,
-         images: [
-            'https://lemanoosh.com/app/uploads/BO_2019_A1_Natural_Brushed_05-768x1156.jpg',
-         ],
+         title: 'Váy Maxi Hoa Nhí Mùa Hè',
+         brand: 'Bloom Dress',
+         categories: ['Váy & Đầm'],
+         keywords: ['váy maxi', 'hoa nhí', 'mùa hè', 'đi biển'],
+         price: 480000,
+         discount: 50000,
+         stock: 30,
+         description: 'Váy maxi dáng dài họa tiết hoa nhí nhỏ xinh, chất liệu voan mềm mại, thoáng mát. Phù hợp đi biển, dã ngoại hoặc dạo phố ngày hè.',
+         images: ['https://images.unsplash.com/photo-1572804013427-4d7ca7268217?w=800'],
       },
       {
-         title: 'Audio Technica Turn-table',
-         brand: 'Audio Technica',
-
-         categories: ['Electronics'],
-         keywords: ['music', 'brushed', 'mechanical'],
-         price: 12.99,
-         images: [
-            'https://lemanoosh.com/app/uploads/gerhardt-kellermann-zeitmagazin-10.jpg',
-         ],
+         title: 'Áo Khoác Jean Phong Cách',
+         brand: 'Urban Denim',
+         categories: ['Áo'],
+         keywords: ['áo khoác', 'jean', 'denim', 'street style'],
+         price: 650000,
+         discount: 100000,
+         stock: 15,
+         description: 'Áo khoác jean phong cách street style, chất denim dày dặn, form rộng trendy. Dễ dàng phối với áo thun hoặc váy để tạo nên outfit cá tính.',
+         images: ['https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800'],
       },
       {
-         title: 'Monocle Sneakers',
-         brand: 'Monocle',
-
-         categories: ['Electronics'],
-         keywords: ['shoes', 'brushed', 'mechanical'],
-         price: 1.99,
-         images: [
-            'https://lemanoosh.com/app/uploads/plp-women-footwear-sneakers-04-07-768x1246.jpg',
-         ],
+         title: 'Quần Jogger Thể Thao Cotton',
+         brand: 'Active Zone',
+         categories: ['Quần'],
+         keywords: ['quần jogger', 'thể thao', 'cotton', 'tập gym'],
+         price: 299000,
+         discount: 0,
+         stock: 40,
+         description: 'Quần jogger chất cotton co giãn 4 chiều, thoáng khí và thấm hút mồ hôi tốt. Phù hợp tập gym, yoga, chạy bộ hoặc mặc ở nhà.',
+         images: ['https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=800'],
       },
       {
-         title: 'Zone2 Mens Watch',
-         brand: 'Zone2',
-
-         categories: ['Electronics'],
-         keywords: ['shoes', 'brushed', 'mechanical'],
-         price: 129.99,
-         images: ['https://lemanoosh.com/app/uploads/0055-768x1023.jpg'],
+         title: 'Túi Tote Canvas Thời Trang',
+         brand: 'EcoStyle',
+         categories: ['Túi Xách'],
+         keywords: ['túi tote', 'canvas', 'thân thiện môi trường', 'đi học'],
+         price: 199000,
+         discount: 0,
+         stock: 50,
+         description: 'Túi tote vải canvas dày dặn, sức chứa lớn. Thiết kế đơn giản nhưng thời trang, phù hợp đi học, đi chợ hoặc dạo phố.',
+         images: ['https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=800'],
       },
       {
-         title: 'Carl Hauser L1 Phone',
-         brand: 'Carl Hauser',
-         categories: ['Electronics'],
-         keywords: ['shoes', 'brushed', 'mechanical'],
-         price: 5.99,
-         images: [
-            'https://lemanoosh.com/app/uploads/carl-hauser-0121-768x993.jpg',
-         ],
+         title: 'Giày Sneaker Trắng Basic',
+         brand: 'StepUp',
+         categories: ['Giày Dép'],
+         keywords: ['giày sneaker', 'trắng', 'basic', 'năng động'],
+         price: 520000,
+         discount: 70000,
+         stock: 20,
+         description: 'Giày sneaker trắng classic không bao giờ lỗi mốt. Đế cao su chống trơn trượt, lót giày êm ái. Phối được với mọi loại trang phục từ casual đến smart casual.',
+         images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'],
       },
       {
-         title: 'Carl Hauser Scanner',
-         brand: 'Carl Hauser',
-         categories: ['Electronics'],
-         keywords: ['shoes', 'brushed', 'mechanical'],
-         price: 22.99,
-         images: [
-            'https://lemanoosh.com/app/uploads/carl-hauser-020-768x973.jpg',
-         ],
+         title: 'Đầm Công Sở Thanh Lịch',
+         brand: 'Office Lady',
+         categories: ['Váy & Đầm'],
+         keywords: ['đầm công sở', 'thanh lịch', 'chuyên nghiệp', 'nữ'],
+         price: 720000,
+         discount: 120000,
+         stock: 18,
+         description: 'Đầm công sở dáng A-line thanh lịch, chất liệu cao cấp chống nhăn. Thiết kế tinh tế phù hợp môi trường văn phòng và các buổi họp quan trọng.',
+         images: ['https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800'],
       },
       {
-         title: 'Bright Neon Helmet',
-         brand: 'Bright',
-         categories: ['Electronics'],
-         keywords: ['shoes', 'brushed', 'mechanical'],
-         price: 17.99,
-         images: [
-            'https://lemanoosh.com/app/uploads/Orange_white-_Helmet_01.jpg',
-         ],
+         title: 'Mũ Bucket Thời Trang',
+         brand: 'Trendy Hats',
+         categories: ['Phụ Kiện'],
+         keywords: ['mũ bucket', 'thời trang', 'che nắng', 'unisex'],
+         price: 159000,
+         discount: 0,
+         stock: 60,
+         description: 'Mũ bucket phong cách retro đang được giới trẻ yêu thích. Chất liệu vải mềm, có thể gấp gọn bỏ túi, che nắng hiệu quả.',
+         images: ['https://images.unsplash.com/photo-1575428652377-a2d80e2277fc?w=800'],
+      },
+      {
+         title: 'Áo Thun Oversize In Hình',
+         brand: 'Street Vibe',
+         categories: ['Áo'],
+         keywords: ['áo thun', 'oversize', 'in hình', 'unisex'],
+         price: 250000,
+         discount: 30000,
+         stock: 35,
+         description: 'Áo thun oversize in hình graphic độc đáo, chất cotton mềm mịn thoáng mát. Form rộng thoải mái, phù hợp cả nam và nữ.',
+         images: ['https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800'],
+      },
+      {
+         title: 'Bộ Đồ Ngủ Lụa Cao Cấp',
+         brand: 'Silk Dream',
+         categories: ['Đồ Thể Thao'],
+         keywords: ['đồ ngủ', 'lụa', 'cao cấp', 'thoải mái'],
+         price: 890000,
+         discount: 150000,
+         stock: 12,
+         description: 'Bộ đồ ngủ chất lụa mềm mại cao cấp, cảm giác mát mẻ và dễ chịu. Thiết kế thanh lịch, màu sắc nhẹ nhàng phù hợp làm quà tặng.',
+         images: ['https://images.unsplash.com/photo-1617922001439-4a2e6562f328?w=800'],
       },
    ]
 
    const blogPosts = [
       {
-         slug: 'how-can-ai',
-         title: 'How can AI be used to generate revenue in the cryptocurrency space',
-         description: 'In this article, young and...',
-         image: 'https://media.product.which.co.uk/prod/images/original/3cc919e52b08-apple-wwcd23-vision-pro-lifestyle-working-230605.jpg',
-         categories: ['technology', 'architecture'],
+         slug: 'xu-huong-thoi-trang-2024',
+         title: 'Xu Hướng Thời Trang Nữ Nổi Bật Năm 2024',
+         description: 'Khám phá những xu hướng thời trang nổi bật nhất năm 2024 mà bạn không thể bỏ qua...',
+         image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
+         categories: ['thời trang', 'xu hướng'],
          content:
-            "In this blog post we'll go over how AI can be used to generate revenue in the cryptocurrency space. For example in spaces like DAOs ( Decentralized autonomous organizations ). Decentralized autonomous organizations, or DAOs, are using AI to manage and automate their processes in order to save on costs. This increased efficiency can lead to more revenue for the organization. <MDXImage alt='Artificial Intelligence' src='https://cdn.dribbble.com/users/1358460/screenshots/14313986/media/cf14d4ef432f3a05078df0ac1d1e7387.jpg' /> To provide a clear real-world example of how AI tools like OpenAI's GPT-3 or DALL·E 2 can be used in the DAO ( Decentralized Autonomous Organizations ) space, let's take a look at the example of a digital marketing campaign: In the past, a typical digital marketing campaign might have required hiring an external agency or consultants to manage various aspects of the project including content creation, graphic design, website development, and social media outreach. With AI tools like GPT-3 and DALL·E 2 now available, however, it's possible for DAOs to automate many of these tasks internally without needing to hire outside help. This can lead to significant cost savings for the organization while still maintaining high-quality standards. Additionally, by using AI-powered tools like GPT-3 or DALL·E 2 , DAOs can scale their operations much more easily and reach a larger audience with less effort than traditional methods require.",
+            'Năm 2024 mang đến nhiều xu hướng thời trang thú vị và đa dạng. Từ phong cách minimalist thanh lịch đến streetwear cá tính, mỗi phong cách đều có sức hút riêng. Màu sắc nổi bật năm nay là tông màu đất (earth tone), pastel và các gam màu rực rỡ như coral, cobalt blue. Về chất liệu, vải tự nhiên như linen, cotton hữu cơ và lụa tiếp tục được ưa chuộng nhờ tính thân thiện với môi trường và cảm giác thoải mái khi mặc.',
       },
       {
-         slug: 'how-ai-generated',
-         title: 'How AI-Generated Content Will Impact the Future of Architectural Engineering',
-         description: 'AI-powered software Midjourney...',
-         image: 'https://pbs.twimg.com/media/Fx5CjjBWcAEEte0.jpg',
-         categories: ['technology', 'design', 'academic'],
+         slug: 'meo-phoi-do-hang-ngay',
+         title: 'Bí Kíp Phối Đồ Hàng Ngày Đơn Giản Mà Đẹp',
+         description: 'Những gợi ý phối đồ đơn giản nhưng cực kỳ thời trang cho các cô gái bận rộn...',
+         image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800',
+         categories: ['phối đồ', 'tips thời trang'],
          content:
-            "With the increased use of artificial intelligence (AI) in content generation, it is important to consider how this technology will impact the future of architectural engineering. For example, OpenAI's GPT3 or DALL·E 2 can be used to generate realistic 3D models of buildings or structures. This could potentially reduce the need for architects to create these models by hand. Additionally, AI-generated content could be used to create realistic simulations of proposed buildings or structures, and to render them in very realistic manners. <MDXImage alt='AI Generated Content' src='vhttps://cdn.80.lv/api/upload/content/ef/62ab0fc526d9a.jpeg' /> This could help architects to better assess the feasibility of a project before construction begins. It is important to note that AI-generated content is not perfect and there may be some errors. However, as the technology improves, it is likely that these error rates will decrease. Additionally, AI-generated content can be customized to meet the specific needs of a project. For example, if an architect wants to see how a building will look in different lighting conditions, they can use an AI program to generate multiple versions of the same model. They can change the design of the model to make it look more original. Overall, AI-generated content has the potential to greatly impact the field of architectural engineering. As technology improves, it is likely that more and more architects will begin to use AI-generated content in their work. In conclusion, AI-generated content has the potential to revolutionize architectural engineering. It can help reduce the workload of architects and provide them with more accurate information about proposed projects.",
+            'Phối đồ đẹp không nhất thiết phải có tủ quần áo đầy ắp hay những món đồ hàng hiệu đắt tiền. Bí quyết nằm ở việc lựa chọn những item cơ bản chất lượng và biết cách kết hợp chúng thông minh. Chiếc áo sơ mi trắng, quần jeans xanh và sneaker trắng – bộ ba này chưa bao giờ lỗi mốt và có thể phối được trong mọi hoàn cảnh. Hãy đầu tư vào những item tốt thay vì mua nhiều đồ rẻ tiền không bền.',
       },
       {
-         slug: 'sci-fi-environmental',
-         title: 'Sci-Fi Environmental Concept Art with Midjourney',
-         description:
-            'Examples AI Generated Images can be used to enhance concept design.',
-         image: 'https://intl.nothing.tech/cdn/shop/files/PC2_2160x.jpg?v=1680179311',
-         categories: ['technology', 'design', 'game-design'],
+         slug: 'thoi-trang-ben-vung',
+         title: 'Thời Trang Bền Vững: Xu Hướng Của Tương Lai',
+         description: 'Thời trang bền vững không chỉ là xu hướng mà còn là trách nhiệm của mỗi người...',
+         image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800',
+         categories: ['bền vững', 'môi trường', 'thời trang'],
          content:
-            "In this blog post we'll go over how AI can be used to generate revenue in the cryptocurrency space. For example in spaces like DAOs ( Decentralized autonomous organizations ). Decentralized autonomous organizations, or DAOs, are using AI to manage and automate their processes in order to save on costs. This increased efficiency can lead to more revenue for the organization. <MDXImage alt='Artificial Intelligence' src='https://cdn.dribbble.com/users/1358460/screenshots/14313986/media/cf14d4ef432f3a05078df0ac1d1e7387.jpg' /> To provide a clear real-world example of how AI tools like OpenAI's GPT-3 or DALL·E 2 can be used in the DAO ( Decentralized Autonomous Organizations ) space, let's take a look at the example of a digital marketing campaign: In the past, a typical digital marketing campaign might have required hiring an external agency or consultants to manage various aspects of the project including content creation, graphic design, website development, and social media outreach. With AI tools like GPT-3 and DALL·E 2 now available, however, it's possible for DAOs to automate many of these tasks internally without needing to hire outside help. This can lead to significant cost savings for the organization while still maintaining high-quality standards. Additionally, by using AI-powered tools like GPT-3 or DALL·E 2 , DAOs can scale their operations much more easily and reach a larger audience with less effort than traditional methods require.",
+            'Ngành thời trang đang chuyển mình mạnh mẽ theo hướng bền vững và thân thiện với môi trường. Nhiều thương hiệu lớn đã cam kết sử dụng nguyên liệu tái chế, giảm lượng nước và carbon trong quá trình sản xuất. Với tư cách là người tiêu dùng, bạn có thể đóng góp bằng cách mua ít hơn nhưng chọn những món đồ chất lượng cao và bền vững, ủng hộ các thương hiệu có ý thức về môi trường, và thực hành tái chế quần áo cũ.',
       },
    ]
 
    const banners = [
       {
-         image: 'https://marketplace.canva.com/EAFgoIbXL34/1/0/1600w/canva-beige-minimalist-mother%27s-day-sale-promotional-banner-YpclZeIn87Q.jpg',
-         label: 'Something',
+         image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600',
+         label: 'Bộ Sưu Tập Mới Nhất 2024',
       },
       {
-         image: 'https://globaltv.es/wp-content/uploads/2022/10/bang-olufsen-salon.webp',
-         label: 'Something',
+         image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600',
+         label: 'Sale Mùa Hè - Giảm Đến 50%',
       },
       {
-         image: 'https://marketplace.canva.com/EAFhXw50O8Q/1/0/1600w/canva-beige-minimalist-fashion-collection-photo-collage-banner-VTuOcmKhSd4.jpg',
-         label: 'Something',
+         image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600',
+         label: 'Thời Trang Phong Cách - Phong Cách Của Bạn',
       },
       {
-         image: 'https://marketplace.canva.com/EAFOMzwkPtk/1/0/1600w/canva-chic-website-homepage-fashion-collage-banner-QtOtaBX5FCE.jpg',
-         label: 'Something',
+         image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600',
+         label: 'Miễn Phí Vận Chuyển Đơn Từ 500K',
       },
    ]
 
@@ -191,9 +221,9 @@ async function main() {
          })
       }
 
-      console.log('Created Banners...')
+      console.log('Đã tạo Banners...')
    } catch (error) {
-      console.error('Could not create banners...')
+      console.error('Không thể tạo banners...')
    }
 
    try {
@@ -201,13 +231,14 @@ async function main() {
          await prisma.owner.create({
             data: {
                email: owner,
+               name: 'Quản Trị Viên Tinori',
             },
          })
       }
 
-      console.log('Created Owners...')
+      console.log('Đã tạo tài khoản Admin...')
    } catch (error) {
-      console.error('Could not create owners...')
+      console.error('Không thể tạo tài khoản admin...')
    }
 
    try {
@@ -219,20 +250,21 @@ async function main() {
          })
       }
 
-      console.log('Created Categories...')
+      console.log('Đã tạo Danh mục...')
    } catch (error) {
-      console.error('Could not create Categories...')
+      console.error('Không thể tạo danh mục...')
    }
 
    try {
       for (const product of products) {
          const createdProduct = await prisma.product.create({
             data: {
-               isAvailable: getRandomBoolean(),
+               isAvailable: true,
+               isFeatured: getRandomBoolean(),
                title: product.title,
-               price: getRandomFloat(20, 100, 2),
-               stock: getRandomIntInRange(1, 20),
-               discount: getRandomIntInRange(1, 15),
+               price: product.price,
+               stock: product.stock,
+               discount: product.discount,
                brand: {
                   connectOrCreate: {
                      where: {
@@ -240,12 +272,12 @@ async function main() {
                      },
                      create: {
                         title: product.brand,
-                        description: 'Description of this brand.',
+                        description: 'Thương hiệu thời trang chất lượng cao.',
                         logo: 'https://cdn.logojoy.com/wp-content/uploads/20221122125557/morridge-coffee-vintage-logo-600x392.png',
                      },
                   },
                },
-               description: 'Description of this product.',
+               description: product.description,
                images: product.images,
                keywords: product.keywords,
                categories: {
@@ -262,31 +294,31 @@ async function main() {
          createdProducts.push(createdProduct)
       }
 
-      console.log('Created Products...')
+      console.log('Đã tạo Sản phẩm...')
    } catch (error) {
-      console.error('Could not create products...')
+      console.error('Không thể tạo sản phẩm...', error)
    }
 
    try {
       await prisma.author.create({
          data: {
-            name: 'Amirhossein Mohammadi',
-            email: 'sesto@post.com',
+            name: 'Nguyễn Thị Mai',
+            email: 'admin@tinori.vn',
             blogs: {
                create: blogPosts,
             },
          },
       })
 
-      console.log('Created Authors...')
+      console.log('Đã tạo Tác giả blog...')
    } catch (error) {
-      console.error('Could not create authors...')
+      console.error('Không thể tạo tác giả blog...')
    }
 
    const user = await prisma.user.create({
       data: {
-         email: 'sesto@post.com',
-         name: 'Amirhossein Mohammadi',
+         email: 'admin@tinori.vn',
+         name: 'Nguyễn Văn Admin',
          cart: {
             create: {},
          },
@@ -300,27 +332,28 @@ async function main() {
       },
    })
 
-   console.log('Created Users...')
+   console.log('Đã tạo Người dùng...')
 
    for (const provider of providers) {
       const createdProvider = await prisma.paymentProvider.create({
          data: {
             title: provider,
+            isActive: true,
          },
       })
 
       createdProviders.push(createdProvider)
    }
 
-   console.log('Created Providers...')
+   console.log('Đã tạo Cổng thanh toán...')
 
    for (let i = 0; i < 10; i++) {
       const order = await prisma.order.create({
          data: {
-            createdAt: getRandomDate(new Date(2023, 2, 27), new Date()),
-            payable: getRandomFloat(20, 100, 2),
-            discount: getRandomFloat(20, 100, 2),
-            shipping: getRandomFloat(20, 100, 2),
+            createdAt: getRandomDate(new Date(2024, 0, 1), new Date()),
+            payable: getRandomFloat(200000, 2000000, 0),
+            discount: getRandomFloat(0, 200000, 0),
+            shipping: getRandomFloat(20000, 50000, 0),
             status: 'Processing',
             user: { connect: { id: user.id } },
             isPaid: true,
@@ -328,8 +361,8 @@ async function main() {
                create: {
                   status: 'Processing',
                   isSuccessful: true,
-                  payable: getRandomFloat(20, 100, 2),
-                  refId: getRandomFloat(1, 200, 2).toString(),
+                  payable: getRandomFloat(200000, 2000000, 0),
+                  refId: getRandomIntInRange(100000, 999999).toString(),
                   user: {
                      connect: { id: user.id },
                   },
@@ -348,7 +381,7 @@ async function main() {
                      createdProducts[
                         getRandomIntInRange(0, createdProducts.length - 1)
                      ]?.id,
-                  count: 1,
+                  count: getRandomIntInRange(1, 3),
                   price: createdProducts[
                      getRandomIntInRange(0, createdProducts.length - 1)
                   ].price,
@@ -359,7 +392,7 @@ async function main() {
       })
    }
 
-   console.log('Created Orders...')
+   console.log('Đã tạo Đơn hàng...')
 }
 
 try {
