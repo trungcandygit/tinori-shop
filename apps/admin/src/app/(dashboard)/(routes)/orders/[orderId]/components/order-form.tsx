@@ -84,26 +84,6 @@ export const OrderForm: React.FC<OrderFormProps> = ({ initialData }) => {
    const onSubmit = async (data: OrderFormValues) => {
       try {
          setLoading(true)
-<<<<<<< Updated upstream
-
-         if (initialData) {
-            await fetch(`/api/products/${params.productId}`, {
-               method: 'PATCH',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
-         } else {
-            await fetch(`/api/products`, {
-               method: 'POST',
-               body: JSON.stringify(data),
-               cache: 'no-store',
-            })
-         }
-
-         router.refresh()
-         router.push(`/products`)
-         toast.success(toastMessage)
-=======
          await fetch(`/api/orders/${params.orderId}`, {
             method: 'PATCH',
             body: JSON.stringify(data),
@@ -111,7 +91,6 @@ export const OrderForm: React.FC<OrderFormProps> = ({ initialData }) => {
          })
          window.location.assign(`/orders`)
          toast.success('Đơn hàng đã được cập nhật.')
->>>>>>> Stashed changes
       } catch (error: any) {
          toast.error('Đã có lỗi xảy ra.')
       } finally {

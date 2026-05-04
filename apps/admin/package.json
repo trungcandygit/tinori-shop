@@ -18,6 +18,8 @@
    },
    "dependencies": {
       "@hookform/resolvers": "^3.9.0",
+      "@react-email/components": "^0.0.22",
+      "@react-email/render": "^1.0.0",
       "@persepolis/mail": "^1.0.9",
       "@persepolis/regex": "^0.0.3",
       "@persepolis/rng": "^0.0.1",
