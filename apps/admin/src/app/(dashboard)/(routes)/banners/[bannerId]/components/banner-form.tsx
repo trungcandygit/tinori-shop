@@ -22,7 +22,6 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { Heading } from '@/components/ui/heading'
 import { AlertModal } from '@/components/modals/alert-modal'
-import ImageUpload from '@/components/ui/image-upload'
 
 const formSchema = z.object({
    label: z.string().min(1),
@@ -135,13 +134,12 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
                   name="image"
                   render={({ field }) => (
                      <FormItem>
-                        <FormLabel>Background image</FormLabel>
+                        <FormLabel>URL hình ảnh</FormLabel>
                         <FormControl>
-                           <ImageUpload
-                              value={field.value ? [field.value] : []}
+                           <Input
                               disabled={loading}
-                              onChange={(url) => field.onChange(url)}
-                              onRemove={() => field.onChange('')}
+                              placeholder="https://example.com/image.jpg"
+                              {...field}
                            />
                         </FormControl>
                         <FormMessage />

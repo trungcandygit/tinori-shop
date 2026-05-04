@@ -13,7 +13,6 @@ import {
    FormMessage,
 } from '@/components/ui/form'
 import { Heading } from '@/components/ui/heading'
-import ImageUpload from '@/components/ui/image-upload'
 import { Input } from '@/components/ui/input'
 import {
    Select,
@@ -171,19 +170,11 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                      <FormItem>
                         <FormLabel>Hình Ảnh</FormLabel>
                         <FormControl>
-                           <ImageUpload
-                              value={field.value.map((image) => image)}
+                           <Input
                               disabled={loading}
-                              onChange={(url) =>
-                                 field.onChange([...field.value, { url }])
-                              }
-                              onRemove={(url) =>
-                                 field.onChange([
-                                    ...field.value.filter(
-                                       (current) => current !== url
-                                    ),
-                                 ])
-                              }
+                              placeholder="https://example.com/image.jpg (phân cách bằng dấu phẩy)"
+                              value={field.value.join(',')}
+                              onChange={(e) => field.onChange(e.target.value.split(',').map(s => s.trim()).filter(Boolean))}
                            />
                         </FormControl>
                         <FormMessage />
