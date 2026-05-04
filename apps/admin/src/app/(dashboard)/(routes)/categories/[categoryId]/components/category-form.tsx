@@ -81,7 +81,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
          toast.success(toastMessage)
          window.location.assign(`/categories`)
       } catch (error: any) {
-         toast.error('Đã có lỗi xảy ra.')
+         toast.error(error.message || 'Đã có lỗi xảy ra.')
       } finally {
          setLoading(false)
       }

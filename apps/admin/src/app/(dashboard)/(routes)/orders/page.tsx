@@ -25,30 +25,22 @@ export default async function OrdersPage({ searchParams }) {
 
    const orders = await prisma.order.findMany({
       where: {
-         userId,
-         isPaid,
-         orderItems: {
-            some: {
-               product: {
-                  brand: {
-                     title: {
-                        contains: brand,
-                     },
-                  },
-                  categories: {
-                     some: {
-                        title: {
-                           contains: category,
-                        },
-                     },
-                  },
+         ...(userId && { userId }),
+         ...(isPaid !== undefined && { isPaid }),
+         ...(brand && {
+            orderItems: {
+               some: { product: { brand: { title: { contains: brand } } } },
+            },
+         }),
+         ...(category && {
+            orderItems: {
+               some: {
+                  product: { categories: { some: { title: { contains: category } } } },
                },
             },
-         },
-         payable: {
-            gte: minPayable,
-            lte: maxPayable,
-         },
+         }),
+         ...(minPayable && { payable: { gte: Number(minPayable) } }),
+         ...(maxPayable && { payable: { lte: Number(maxPayable) } }),
       },
       include: {
          orderItems: {

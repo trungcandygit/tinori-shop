@@ -72,7 +72,7 @@ export const BrandForm: React.FC<BrandFormProps> = ({ initialData }) => {
          toast.success(toastMessage)
          window.location.assign(`/brands`)
       } catch (error: any) {
-         toast.error('Đã có lỗi xảy ra.')
+         toast.error(error.message || 'Đã có lỗi xảy ra.')
       } finally {
          setLoading(false)
       }

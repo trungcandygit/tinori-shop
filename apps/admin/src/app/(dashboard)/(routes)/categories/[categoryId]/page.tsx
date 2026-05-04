@@ -13,11 +13,7 @@ const CategoryPage = async ({
       },
    })
 
-   const banners = await prisma.banner.findMany({
-      where: {
-         id: params.id,
-      },
-   })
+   const banners = await prisma.banner.findMany()
 
    return (
       <div className="flex-col">
