@@ -17,19 +17,19 @@ export type AddressColumn = {
 export const columns: ColumnDef<AddressColumn>[] = [
    {
       accessorKey: 'city',
-      header: 'City',
+      header: 'Thành Phố',
    },
    {
       accessorKey: 'address',
-      header: 'Address',
+      header: 'Địa Chỉ',
    },
    {
       accessorKey: 'phone',
-      header: 'Phone Number',
+      header: 'Số Điện Thoại',
    },
    {
       accessorKey: 'postal',
-      header: 'Postal Code',
+      header: 'Mã Bưu Chính',
    },
    {
       id: 'actions',

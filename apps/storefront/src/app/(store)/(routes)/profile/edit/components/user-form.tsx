@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import {
    Form,
    FormControl,
-   FormDescription,
    FormField,
    FormItem,
    FormLabel,
@@ -13,7 +12,7 @@ import {
 import { Input } from '@/components/ui/input'
 import type { UserWithIncludes } from '@/types/prisma'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
@@ -32,23 +31,13 @@ interface UserFormProps {
 }
 
 export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
-   const params = useParams()
    const router = useRouter()
 
    const [loading, setLoading] = useState(false)
 
-   const toastMessage = 'User updated.'
-   const action = 'Save changes'
-
    const defaultValues = initialData
-      ? {
-           ...initialData,
-        }
-      : {
-           name: '---',
-           phone: '---',
-           email: '---',
-        }
+      ? { ...initialData }
+      : { name: '', phone: '', email: '' }
 
    const form = useForm<UserFormValues>({
       resolver: zodResolver(formSchema),
@@ -59,25 +48,16 @@ export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
       try {
          setLoading(true)
 
-         if (initialData) {
-            await fetch(`/api/products/${params.productId}`, {
-               method: 'PATCH',
-               body: JSON.stringify({ data }),
-               cache: 'no-store',
-            })
-         } else {
-            await fetch(`/api/products`, {
-               method: 'POST',
-               body: JSON.stringify({ data }),
-               cache: 'no-store',
-            })
-         }
+         await fetch(`/api/profile`, {
+            method: 'PATCH',
+            body: JSON.stringify(data),
+            cache: 'no-store',
+         })
 
          router.refresh()
-         router.push(`/products`)
-         toast.success(toastMessage)
+         toast.success('Thông tin đã được cập nhật.')
       } catch (error: any) {
-         toast.error('Something went wrong.')
+         toast.error('Đã có lỗi xảy ra.')
       } finally {
          setLoading(false)
       }
@@ -94,11 +74,11 @@ export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
                name="name"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Name</FormLabel>
+                     <FormLabel>Họ Tên</FormLabel>
                      <FormControl>
                         <Input
                            disabled={loading}
-                           placeholder="Full Name"
+                           placeholder="Nguyễn Văn A"
                            {...field}
                         />
                      </FormControl>
@@ -115,7 +95,7 @@ export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
                      <FormControl>
                         <Input
                            disabled={loading}
-                           placeholder="Email"
+                           placeholder="ten@example.com"
                            {...field}
                         />
                      </FormControl>
@@ -128,11 +108,11 @@ export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
                name="phone"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel>Phone</FormLabel>
+                     <FormLabel>Số Điện Thoại</FormLabel>
                      <FormControl>
                         <Input
                            disabled={loading}
-                           placeholder="Phone"
+                           placeholder="0912 345 678"
                            {...field}
                         />
                      </FormControl>
@@ -141,7 +121,7 @@ export const UserForm: React.FC<UserFormProps> = ({ initialData }) => {
                )}
             />
             <Button disabled={loading} className="ml-auto" type="submit">
-               {action}
+               Lưu Thay Đổi
             </Button>
          </form>
       </Form>

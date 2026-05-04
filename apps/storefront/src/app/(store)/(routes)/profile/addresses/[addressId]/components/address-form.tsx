@@ -43,10 +43,10 @@ export const AddressForm: React.FC<AddressFormProps> = ({ initialData }) => {
    const [open, setOpen] = useState(false)
    const [loading, setLoading] = useState(false)
 
-   const title = initialData ? 'Edit address' : 'Create address'
-   const description = initialData ? 'Edit a address.' : 'Add a new address'
-   const toastMessage = initialData ? 'Address updated.' : 'Address created.'
-   const action = initialData ? 'Save changes' : 'Create'
+   const title = initialData ? 'Chỉnh Sửa Địa Chỉ' : 'Thêm Địa Chỉ Mới'
+   const description = initialData ? 'Chỉnh sửa địa chỉ giao hàng.' : 'Thêm địa chỉ giao hàng mới'
+   const toastMessage = initialData ? 'Địa chỉ đã được cập nhật.' : 'Địa chỉ đã được tạo.'
+   const action = initialData ? 'Lưu Thay Đổi' : 'Tạo Mới'
 
    const form = useForm<AddressFormValues>({
       resolver: zodResolver(formSchema),
@@ -72,7 +72,7 @@ export const AddressForm: React.FC<AddressFormProps> = ({ initialData }) => {
          router.push(`/profile/addresses`)
          toast.success(toastMessage)
       } catch (error: any) {
-         toast.error('Something went wrong.')
+         toast.error('Đã có lỗi xảy ra.')
       } finally {
          setLoading(false)
       }
@@ -89,11 +89,9 @@ export const AddressForm: React.FC<AddressFormProps> = ({ initialData }) => {
 
          router.refresh()
          router.push(`/addresses`)
-         toast.success('Address deleted.')
+         toast.success('Địa chỉ đã được xoá.')
       } catch (error: any) {
-         toast.error(
-            'Make sure you removed all categories using this address first.'
-         )
+         toast.error('Đã có lỗi xảy ra khi xoá địa chỉ.')
       } finally {
          setLoading(false)
          setOpen(false)
@@ -133,11 +131,11 @@ export const AddressForm: React.FC<AddressFormProps> = ({ initialData }) => {
                      name="city"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Label</FormLabel>
+                           <FormLabel>Thành Phố</FormLabel>
                            <FormControl>
                               <Input
                                  disabled={loading}
-                                 placeholder="Tehran"
+                                 placeholder="Hồ Chí Minh"
                                  {...field}
                               />
                            </FormControl>
@@ -151,11 +149,11 @@ export const AddressForm: React.FC<AddressFormProps> = ({ initialData }) => {
                      name="phone"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Phone</FormLabel>
+                           <FormLabel>Số Điện Thoại</FormLabel>
                            <FormControl>
                               <Input
                                  disabled={loading}
-                                 placeholder="09123456789"
+                                 placeholder="0912 345 678"
                                  {...field}
                               />
                            </FormControl>
@@ -168,11 +166,11 @@ export const AddressForm: React.FC<AddressFormProps> = ({ initialData }) => {
                      name="postalCode"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel>Postal Code</FormLabel>
+                           <FormLabel>Mã Bưu Chính</FormLabel>
                            <FormControl>
                               <Input
                                  disabled={loading}
-                                 placeholder="1234567890"
+                                 placeholder="700000"
                                  {...field}
                               />
                            </FormControl>
@@ -186,11 +184,11 @@ export const AddressForm: React.FC<AddressFormProps> = ({ initialData }) => {
                         name="address"
                         render={({ field }) => (
                            <FormItem>
-                              <FormLabel>Address</FormLabel>
+                              <FormLabel>Địa Chỉ Chi Tiết</FormLabel>
                               <FormControl>
                                  <Textarea
                                     disabled={loading}
-                                    placeholder="Street - Building Number"
+                                    placeholder="Số nhà - Tên đường - Phường/Xã - Quận/Huyện"
                                     {...field}
                                  />
                               </FormControl>

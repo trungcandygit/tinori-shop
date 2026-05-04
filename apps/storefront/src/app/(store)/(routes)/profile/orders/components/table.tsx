@@ -18,19 +18,19 @@ export type OrderColumn = {
 export const columns: ColumnDef<OrderColumn>[] = [
    {
       accessorKey: 'number',
-      header: 'Order Number',
+      header: 'Mã Đơn Hàng',
    },
    {
       accessorKey: 'date',
-      header: 'Date',
+      header: 'Ngày Đặt',
    },
    {
       accessorKey: 'payable',
-      header: 'Payable',
+      header: 'Tổng Tiền',
    },
    {
       accessorKey: 'isPaid',
-      header: 'Paid',
+      header: 'Đã Thanh Toán',
       cell: (props) => {
          return props.cell.getValue() ? <CheckIcon /> : <XIcon />
       },

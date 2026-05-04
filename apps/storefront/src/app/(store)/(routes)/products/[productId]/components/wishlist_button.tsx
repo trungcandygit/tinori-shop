@@ -99,7 +99,7 @@ export default function WishlistButton({ product }) {
    if (!isProductInWishlist()) {
       return (
          <Button className="flex gap-2" onClick={onAddToWishlist}>
-            <HeartIcon className="h-4" /> Add to Wishlist
+            <HeartIcon className="h-4" /> Yêu Thích
          </Button>
       )
    }
@@ -111,7 +111,7 @@ export default function WishlistButton({ product }) {
             className="flex gap-2"
             onClick={onRemoveFromWishlist}
          >
-            <HeartIcon className="h-4" /> Remove from Wishlist
+            <HeartIcon className="h-4" /> Bỏ Yêu Thích
          </Button>
       )
    }

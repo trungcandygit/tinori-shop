@@ -9,11 +9,35 @@ export async function POST(req: Request) {
          return new NextResponse('Unauthorized', { status: 401 })
       }
 
-      const { data } = await req.json()
+      const { title, images, price, discount, stock, categoryId, isFeatured, isAvailable } =
+         await req.json()
 
-      const products = await prisma.product.findMany()
+      if (!title || !categoryId) {
+         return new NextResponse('Title and category are required', { status: 400 })
+      }
 
-      return NextResponse.json(products)
+      const product = await prisma.product.create({
+         data: {
+            title,
+            images: images ?? [],
+            price: Number(price),
+            discount: Number(discount ?? 0),
+            stock: Number(stock ?? 0),
+            isFeatured: Boolean(isFeatured),
+            isAvailable: Boolean(isAvailable),
+            brand: {
+               connectOrCreate: {
+                  where: { title: 'Tinori Fashion' },
+                  create: { title: 'Tinori Fashion', description: 'Thương hiệu mặc định' },
+               },
+            },
+            categories: {
+               connect: { id: categoryId },
+            },
+         },
+      })
+
+      return NextResponse.json(product)
    } catch (error) {
       console.error('[PRODUCTS_POST]', error)
       return new NextResponse('Internal error', { status: 500 })
@@ -28,11 +52,9 @@ export async function GET(req: Request) {
          return new NextResponse('Unauthorized', { status: 401 })
       }
 
-      const { searchParams } = new URL(req.url)
-      const categoryId = searchParams.get('categoryId') || undefined
-      const isFeatured = searchParams.get('isFeatured')
-
-      const products = await prisma.product.findMany()
+      const products = await prisma.product.findMany({
+         include: { categories: true, brand: true },
+      })
 
       return NextResponse.json(products)
    } catch (error) {

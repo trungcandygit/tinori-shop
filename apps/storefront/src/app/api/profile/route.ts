@@ -40,3 +40,28 @@ export async function GET(req: Request) {
       return new NextResponse('Internal error', { status: 500 })
    }
 }
+
+export async function PATCH(req: Request) {
+   try {
+      const userId = req.headers.get('X-USER-ID')
+
+      if (!userId) {
+         return new NextResponse('Unauthorized', { status: 401 })
+      }
+
+      const { name, phone } = await req.json()
+
+      const user = await prisma.user.update({
+         where: { id: userId },
+         data: {
+            ...(name && { name }),
+            ...(phone && { phone }),
+         },
+      })
+
+      return NextResponse.json({ name: user.name, phone: user.phone })
+   } catch (error) {
+      console.error('[PROFILE_PATCH]', error)
+      return new NextResponse('Internal error', { status: 500 })
+   }
+}

@@ -68,9 +68,8 @@ export async function PATCH(
          return new NextResponse('Unauthorized', { status: 401 })
       }
 
-      const {
-         data: { title, price, discount, stock, isFeatured, isAvailable },
-      } = await req.json()
+      const { title, images, price, discount, stock, categoryId, isFeatured, isAvailable } =
+         await req.json()
 
       const product = await prisma.product.update({
          where: {
@@ -78,11 +77,15 @@ export async function PATCH(
          },
          data: {
             title,
-            price,
-            discount,
-            stock,
+            ...(images !== undefined && { images }),
+            price: price !== undefined ? Number(price) : undefined,
+            discount: discount !== undefined ? Number(discount) : undefined,
+            stock: stock !== undefined ? Number(stock) : undefined,
             isFeatured,
             isAvailable,
+            ...(categoryId && {
+               categories: { set: [], connect: { id: categoryId } },
+            }),
          },
       })
 
