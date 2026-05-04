@@ -64,7 +64,7 @@ export const BannerForm: React.FC<BannerFormProps> = ({ initialData }) => {
                cache: 'no-store',
             })
          } else {
-            await fetch(`/banners`, {
+            await fetch(`/api/banners`, {
                method: 'POST',
                body: JSON.stringify(data),
                cache: 'no-store',
