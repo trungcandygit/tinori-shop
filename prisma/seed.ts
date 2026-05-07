@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaLibSql } from "@prisma/adapter-libsql";
+import { PrismaLibSQL } from "@prisma/adapter-libsql";
 import { createClient } from "@libsql/client";
 import bcrypt from "bcryptjs";
 
@@ -10,7 +10,7 @@ let prisma: PrismaClient;
 
 if (isLibsql) {
   const libsql = createClient({ url, authToken: process.env.DATABASE_AUTH_TOKEN });
-  const adapter = new PrismaLibSql(libsql as any);
+  const adapter = new PrismaLibSQL(libsql as any);
   prisma = new PrismaClient({ adapter } as any);
 } else {
   prisma = new PrismaClient();
