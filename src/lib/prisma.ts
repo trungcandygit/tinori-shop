@@ -7,7 +7,10 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 const url = process.env.DATABASE_URL || "file:./dev.db";
-const isLibsql = url.startsWith("libsql://") || url.startsWith("wss://") || url.startsWith("https://");
+const isLibsql =
+  url.startsWith("libsql://") ||
+  url.startsWith("wss://") ||
+  url.startsWith("https://");
 
 let prismaClient: PrismaClient;
 
@@ -17,7 +20,7 @@ if (isLibsql) {
   prismaClient = new PrismaClient({ adapter } as any);
 } else {
   prismaClient = new PrismaClient({
-    log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+    log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
   });
 }
 

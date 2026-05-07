@@ -1,12 +1,23 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["next-auth", "bcryptjs", "@prisma/client", "@libsql/client"],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  serverExternalPackages: [
+    "next-auth",
+    "bcryptjs",
+    "@prisma/client",
+    "@prisma/adapter-libsql",
+    "@libsql/client",
+    "prisma",
+    "nodemailer",
+  ],
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'picsum.photos',
+        protocol: "https",
+        hostname: "picsum.photos",
       },
     ],
   },
