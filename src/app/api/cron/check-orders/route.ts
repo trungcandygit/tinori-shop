@@ -2,9 +2,6 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { sendDepositReminderEmail, sendOrderCancelledEmail } from "@/lib/email";
 
-// API này được gọi định kỳ (mỗi phút) để:
-// 1. Gửi email nhắc cọc sau 7 phút
-// 2. Tự động hủy đơn sau 15 phút nếu chưa có cọc
 export async function GET() {
   const now = new Date();
 
